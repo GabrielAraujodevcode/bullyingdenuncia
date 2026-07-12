@@ -84,7 +84,80 @@
 
     <footer>
 
-       <div class="botao"> <button> Denuncie!</button></div>
+       <div class="botao"> <button id="abrirFormulario">Denuncie!</button></div>
     </footer>
+
+
+
+
+    <!-- FORMULÁRIO DE DENÚNCIA -->
+
+<div class="modal" id="modal">
+
+    <div class="janelaFormulario">
+
+        <button class="fechar" id="fecharFormulario">
+            ✕
+        </button>
+
+        <h2>Denúncia Anônima</h2>
+
+        <form>
+
+            <div class="campo">
+                <label>Usuário</label>
+                <input type="text" placeholder="Crie um nome de usuário" required>
+            </div>
+
+            <div class="campo">
+                <label>Onde ocorreu?</label>
+
+                <select required>
+                    <option>Selecione</option>
+                    <option>Sala</option>
+                    <option>Pátio</option>
+                    <option>Corredor</option>
+                    <option>Banheiro</option>
+                    <option>Internet</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Quem praticou?</label>
+
+                <textarea rows="3" required></textarea>
+            </div>
+
+            <div class="campo">
+                <label>Tipo de Bullying</label>
+
+                <select>
+                    <option>Selecione</option>
+                    <option>Verbal</option>
+                    <option>Físico</option>
+                    <option>Psicológico</option>
+                    <option>Social</option>
+                    <option>Cyberbullying</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Relato</label>
+
+                <textarea rows="6" required></textarea>
+            </div>
+
+            <button class="btnEnviar">
+                Enviar Denúncia
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/inicio.js"></script>
 </body>
 </html>

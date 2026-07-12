@@ -31,10 +31,7 @@ header{
     color: white;
     font-size: clamp(2rem,5vw, 3.125rem);
 }
-#titulo2{
-    color: white;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-}
+
 .containners{
    display: flex;
    justify-content: center;
@@ -67,17 +64,17 @@ header{
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(151, 166, 207, 0.342);
 }
-#servicos,
-#estudante,
-#secretaria{
+#denuncias,
+#apoio,
+#saiba{
     display: flex;
     align-items: center;
     gap: 1.25rem;
 }
 
-#servicos h2,
-#estudante h2,
-#secretaria h2{
+#denuncias h2,
+#saiba h2,
+#apoio h2{
     color: #0A194E;
     font-size: clamp(1.5rem, 3vw, 2.1875rem);
 }
@@ -98,22 +95,7 @@ button:hover{
     transform:translateY(-3px);
     
 }
-.botao{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
-    padding: 0 1rem;
-}
 
-.botao button{
-    background-color: #0056c6;
-    padding: 1.25rem 5rem;
-    font-size: clamp(1rem, 2vw, 1.5625rem);
-    color: white;
-    font-weight: bold;
-    animation: brilho 1.5s infinite ease-in-out;
-}
 a{
     padding: 0.3125rem 2.5rem;
     border-radius: 1.5625rem;
@@ -126,22 +108,6 @@ a{
 a:hover{
     transform:translateY(-3px);
 }
-
-@keyframes brilho{
-    0%{
-        text-shadow: 0 0 5px #fff;
-    }
-    50%{
-        text-shadow:
-        0 0 10px #fff,
-        0 0 20px #3b82f6,
-        0 0 20px #3b82f6;
-    }
-    100%{
-        text-shadow: 0 0 5px #fff;
-    }
-}
-
 
 /* ==========================
 FORMULÁRIO
@@ -257,6 +223,9 @@ FORMULÁRIO
 
     cursor:pointer;
 }
+
+
+
 
 /* ==========================
    TABLETS
