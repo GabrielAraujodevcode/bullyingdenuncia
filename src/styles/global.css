@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+ 
+   min-height: 100vh;
+    background:
+        radial-gradient(circle at top right, rgba(0,86,198,.25), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(80,150,255,.12), transparent 40%),
+        linear-gradient(135deg, #071338, #0a194e, #102761);
+
+    
+}
+header{
+    background-color: #0056c6;
+    padding: 1.875rem;
+    
+   
+}
+svg{
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+button{
+    padding: 0.3125rem 2.5rem;
+    border-radius: 1.5625rem;
+    background-color: #0A194E;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+button:hover{
+    transform:translateY(-3px);
+    
+}

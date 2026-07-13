@@ -1,0 +1,276 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.title h1{
+    color: white;
+
+    font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+/* ==========================
+PÁGINA DO ESTUDANTE
+========================== */
+
+.areaAcompanhamento{
+    display: flex;
+    justify-content: center;
+
+    padding: 3rem 1rem;
+}
+
+.containerAcompanhamento{
+    width: 100%;
+    max-width: 800px;
+
+    padding: 2rem;
+
+    background-color: #E2E8F0E6;
+
+    border-radius: 1.5625rem;
+
+    box-shadow: 0 16px 35px rgba(0, 0, 0, .22);
+}
+
+.containerAcompanhamento h2{
+    margin-bottom: 2rem;
+
+    color: #0A194E;
+
+    font-size: 2rem;
+
+    text-align: center;
+}
+
+.grupoProtocolo,
+.grupoStatus{
+    margin-bottom: 2rem;
+
+    text-align: center;
+}
+
+.tituloInformacao{
+    display: block;
+
+    margin-bottom: .7rem;
+
+    color: #0A194E;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#protocoloEstudante{
+    display: inline-block;
+
+    padding: 1rem 1.5rem;
+
+    background-color: #0A194E;
+
+    color: white;
+
+    border-radius: 1rem;
+
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+
+    letter-spacing: 2px;
+
+    user-select: all;
+}
+
+.statusDenuncia{
+    display: inline-block;
+
+    padding: .8rem 2rem;
+
+    color: white;
+
+    border-radius: 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.statusAnalise{
+    background-color: #d97706;
+}
+
+.statusAndamento{
+    background-color: #0056c6;
+}
+
+.statusConcluida{
+    background-color: #15803d;
+}
+
+/* LINHA DE PROGRESSO */
+
+.etapasStatus{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin: 2.5rem 0;
+}
+
+.etapa{
+    width: 7rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #64748b;
+
+    text-align: center;
+}
+
+.etapa span{
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #cbd5e1;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.etapa p{
+    margin-top: .6rem;
+
+    font-size: .95rem;
+    font-weight: bold;
+}
+
+.etapa.ativa{
+    color: #0A194E;
+}
+
+.etapa.ativa span{
+    background-color: #0056c6;
+}
+
+.linhaEtapa{
+    width: 22%;
+    height: .4rem;
+
+    margin-top: 1.3rem;
+
+    background-color: #cbd5e1;
+
+    border-radius: 1rem;
+}
+
+.linhaEtapa.ativa{
+    background-color: #0056c6;
+}
+
+/* MENSAGEM */
+
+.grupoMensagem h3{
+    margin-bottom: 1rem;
+
+    color: #0A194E;
+
+    font-size: 1.3rem;
+}
+
+.mensagemSecretaria{
+    min-height: 8rem;
+
+    padding: 1.5rem;
+
+    display: flex;
+    align-items: center;
+
+    background-color: white;
+
+    border-left: .4rem solid #0056c6;
+    border-radius: 1rem;
+
+    box-shadow: 0 7px 18px rgba(10, 25, 78, .10);
+}
+
+.mensagemSecretaria p{
+    color: #334155;
+
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+/* ==========================
+RESPONSIVIDADE
+========================== */
+
+@media(max-width: 700px){
+
+    .containerAcompanhamento,
+    .containerTabela,
+    .janelaDenuncia{
+        padding: 1.3rem;
+    }
+
+    .etapasStatus{
+        align-items: flex-start;
+    }
+
+    .etapa{
+        width: 5.5rem;
+    }
+
+    .etapa p{
+        font-size: .75rem;
+    }
+
+    .linhaEtapa{
+        width: 12%;
+    }
+
+    .dadosDenuncia{
+        grid-template-columns: 1fr;
+    }
+
+    .campoCompleto{
+        grid-column: auto;
+    }
+
+    th,
+    td{
+        padding: .9rem;
+    }
+
+}
+
+@media(max-width: 480px){
+
+    .title h1{
+        font-size: 2.2rem;
+    }
+
+    #protocoloEstudante{
+        letter-spacing: 1px;
+    }
+
+    .etapa span{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .linhaEtapa{
+        margin-top: 1.1rem;
+    }
+
+}

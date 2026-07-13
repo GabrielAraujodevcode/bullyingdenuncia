@@ -1,0 +1,430 @@
+/* ==========================
+PÁGINA DA SECRETARIA
+========================== */
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.title h1{
+    color: white;
+
+    font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+
+.areaSecretaria{
+    padding: 3rem 1rem;
+}
+
+.containerTabela{
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    padding: 2rem;
+
+    background-color: #E2E8F0E6;
+
+    border-radius: 1.5625rem;
+
+    box-shadow: 0 16px 35px rgba(0, 0, 0, .22);
+}
+
+.cabecalhoTabela{
+    margin-bottom: 2rem;
+}
+
+.cabecalhoTabela h2{
+    color: #0A194E;
+
+    font-size: 2rem;
+}
+
+.cabecalhoTabela p{
+    margin-top: .5rem;
+
+    color: #475569;
+}
+
+.tabelaResponsiva{
+    overflow-x: auto;
+}
+
+table{
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background-color: white;
+
+    border-radius: 1rem;
+
+    overflow: hidden;
+}
+
+thead{
+    background-color: #0A194E;
+
+    color: white;
+}
+
+th,
+td{
+    padding: 1.2rem;
+
+    text-align: left;
+}
+
+tbody tr{
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:last-child{
+    border-bottom: none;
+}
+
+tbody tr:hover{
+    background-color: #f1f5f9;
+}
+
+.statusTabela{
+    display: inline-block;
+
+    padding: .5rem 1rem;
+
+    color: white;
+
+    border-radius: 2rem;
+
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+.botaoAveriguar{
+    padding: .7rem 1.4rem;
+
+    background-color: #0056c6;
+
+    color: white;
+
+    border-radius: 1rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.botaoAveriguar:hover{
+    transform: translateY(-2px);
+
+    background-color: #00449e;
+}
+
+/* ==========================
+MODAL DA DENÚNCIA
+========================== */
+
+.modalDenuncia{
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    background-color: rgba(0, 0, 0, .68);
+
+    z-index: 999;
+}
+
+.modalDenuncia.ativo{
+    display: flex;
+}
+
+.janelaDenuncia{
+    width: 95%;
+    max-width: 800px;
+    max-height: 92vh;
+
+    padding: 2rem;
+
+    position: relative;
+
+    overflow-y: auto;
+
+    background-color: #E2E8F0;
+
+    border-radius: 1.5625rem;
+
+    animation: abrirModal .35s ease;
+}
+
+.fecharModal{
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    width: 2.8rem;
+    height: 2.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0A194E;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+}
+
+.janelaDenuncia h2{
+    margin-bottom: 1.5rem;
+
+    padding: 0 3rem;
+
+    color: #0A194E;
+
+    font-size: 2rem;
+
+    text-align: center;
+}
+
+.protocoloModal{
+    margin-bottom: 1.5rem;
+
+    text-align: center;
+}
+
+.protocoloModal span{
+    display: block;
+
+    margin-bottom: .5rem;
+
+    color: #475569;
+
+    font-weight: bold;
+}
+
+.protocoloModal strong{
+    display: inline-block;
+
+    padding: .8rem 1.3rem;
+
+    background-color: #0A194E;
+
+    color: white;
+
+    border-radius: .8rem;
+
+    letter-spacing: 2px;
+}
+
+.dadosDenuncia{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1rem;
+
+    margin-bottom: 2rem;
+}
+
+.campoVisualizacao{
+    padding: 1rem;
+
+    background-color: white;
+
+    border-radius: 1rem;
+}
+
+.campoVisualizacao label{
+    display: block;
+
+    margin-bottom: .5rem;
+
+    color: #0A194E;
+
+    font-weight: bold;
+}
+
+.campoVisualizacao p{
+    color: #334155;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.campoCompleto{
+    grid-column: 1 / -1;
+}
+
+.campoAtualizacao{
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1.5rem;
+}
+
+.campoAtualizacao label{
+    margin-bottom: .6rem;
+
+    color: #0A194E;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.campoAtualizacao select,
+.campoAtualizacao textarea{
+    width: 100%;
+
+    padding: .9rem;
+
+    background-color: white;
+
+    border: 1px solid #cbd5e1;
+    border-radius: .8rem;
+
+    color: #0A194E;
+
+    font-size: 1rem;
+
+    outline: none;
+}
+
+.campoAtualizacao textarea{
+    resize: none;
+}
+
+.campoAtualizacao select:focus,
+.campoAtualizacao textarea:focus{
+    border-color: #0056c6;
+
+    box-shadow: 0 0 0 3px rgba(0, 86, 198, .20);
+}
+
+.contadorMensagem{
+    margin-top: .4rem;
+
+    color: #475569;
+
+    text-align: right;
+}
+
+.botaoAtualizar{
+    width: 100%;
+
+    padding: 1rem;
+
+    background-color: #0056c6;
+
+    color: white;
+
+    border-radius: .9rem;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.botaoAtualizar:hover{
+    transform: translateY(-2px);
+
+    background-color: #00449e;
+}
+
+@keyframes abrirModal{
+
+    from{
+        opacity: 0;
+        transform: scale(.92);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+/* ==========================
+RESPONSIVIDADE
+========================== */
+
+@media(max-width: 700px){
+
+    .containerAcompanhamento,
+    .containerTabela,
+    .janelaDenuncia{
+        padding: 1.3rem;
+    }
+
+    .etapasStatus{
+        align-items: flex-start;
+    }
+
+    .etapa{
+        width: 5.5rem;
+    }
+
+    .etapa p{
+        font-size: .75rem;
+    }
+
+    .linhaEtapa{
+        width: 12%;
+    }
+
+    .dadosDenuncia{
+        grid-template-columns: 1fr;
+    }
+
+    .campoCompleto{
+        grid-column: auto;
+    }
+
+    th,
+    td{
+        padding: .9rem;
+    }
+
+}
+
+@media(max-width: 480px){
+
+    .title h1{
+        font-size: 2.2rem;
+    }
+
+    #protocoloEstudante{
+        letter-spacing: 1px;
+    }
+
+    .etapa span{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .linhaEtapa{
+        margin-top: 1.1rem;
+    }
+
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="styles/login.css"
+    >
+
+    <title>Login da Secretaria</title>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="title">
+
+            <h1>Área da Secretaria</h1>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="areaLogin">
+
+            <div class="containerLogin">
+
+                <div class="iconeLogin">
+
+                    <span>🔒</span>
+
+                </div>
+
+                <h2>Entrar no sistema</h2>
+
+                <p class="descricaoLogin">
+                    Digite seus dados para acessar a área da secretaria.
+                </p>
+
+                <form id="formLogin">
+
+                    <div class="campoLogin">
+
+                        <label for="usuario">
+                            Usuário
+                        </label>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Digite seu usuário"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="campoLogin">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <div class="campoSenha">
+
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="mostrarSenha"
+                                class="mostrarSenha"
+                                aria-label="Mostrar senha"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <p
+                        class="mensagemLogin"
+                        id="mensagemLogin"
+                    ></p>
+
+                    <button
+                        type="submit"
+                        class="botaoEntrar"
+                    >
+                        Entrar
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

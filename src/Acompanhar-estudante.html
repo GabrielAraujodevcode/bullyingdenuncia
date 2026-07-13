@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link rel="stylesheet" href="styles/global.css">
+
+    <link
+        rel="stylesheet"
+        href="styles/acompanhar-estudante.css"
+    >
+
+    <title>Acompanhar Denúncia</title>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="title">
+
+            <h1>Acompanhe sua denúncia</h1>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="areaAcompanhamento">
+
+            <div class="containerAcompanhamento">
+
+                <h2>Detalhes da denúncia</h2>
+
+                <div class="grupoProtocolo">
+
+                    <span class="tituloInformacao">
+                        Código da denúncia
+                    </span>
+
+                    <strong id="protocoloEstudante">
+                        DEN-0000-0000-0000
+                    </strong>
+
+                </div>
+
+                <div class="grupoStatus">
+
+                    <span class="tituloInformacao">
+                        Status atual
+                    </span>
+
+                    <div
+                        class="statusDenuncia statusAnalise"
+                        id="statusEstudante"
+                    >
+                        Em análise
+                    </div>
+
+                </div>
+
+                <div class="etapasStatus">
+
+                    <div
+                        class="etapa ativa"
+                        data-status="Em análise"
+                    >
+
+                        <span>1</span>
+
+                        <p>Em análise</p>
+
+                    </div>
+
+                    <div
+                        class="linhaEtapa"
+                        id="linhaEtapa1"
+                    ></div>
+
+                    <div
+                        class="etapa"
+                        data-status="Em andamento"
+                    >
+
+                        <span>2</span>
+
+                        <p>Em andamento</p>
+
+                    </div>
+
+                    <div
+                        class="linhaEtapa"
+                        id="linhaEtapa2"
+                    ></div>
+
+                    <div
+                        class="etapa"
+                        data-status="Concluída"
+                    >
+
+                        <span>3</span>
+
+                        <p>Concluída</p>
+
+                    </div>
+
+                </div>
+
+                <div class="grupoMensagem">
+
+                    <h3>Mensagem da secretaria</h3>
+
+                    <div class="mensagemSecretaria">
+
+                        <p id="mensagemEstudante">
+                            Sua denúncia foi recebida e será analisada
+                            pela equipe responsável.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+   <script src="js/denuncias/shared/storage.js"></script>
+
+<script src="js/denuncias/estudante/elementos.js"></script>
+<script src="js/denuncias/estudante/status.js"></script>
+<script src="js/denuncias/estudante/main.js"></script>
+
+
+</body>
+
+</html>
