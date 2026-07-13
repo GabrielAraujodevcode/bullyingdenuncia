@@ -1,0 +1,864 @@
+/* ==========================
+FORMULÁRIO
+========================== */
+
+.modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.modal.ativo{
+    display:flex;
+}
+
+.janelaFormulario{
+
+    width:90%;
+    max-width:700px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:#E2E8F0;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    position:relative;
+}
+
+.fechar{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#0A194E;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.janelaFormulario h2{
+
+    text-align:center;
+
+    color:#0A194E;
+
+    margin-bottom:25px;
+}
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:20px;
+}
+
+.campo label{
+
+    margin-bottom:8px;
+
+    color:#0A194E;
+
+    font-weight:bold;
+}
+
+.campo input,
+.campo select,
+.campo textarea{
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #ccc;
+
+    outline:none;
+}
+
+.btnEnviar{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#0056c6;
+
+    color:white;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    cursor:pointer;
+}
+
+
+/* ==========================
+JANELA DO PROTOCOLO
+========================== */
+
+.janelaProtocolo{
+
+    width: 90%;
+    max-width: 500px;
+
+    background: #E2E8F0;
+
+    border-radius: 20px;
+
+    padding: 40px 30px 30px;
+
+    position: relative;
+
+    text-align: center;
+
+    animation: aparecerProtocolo .4s ease;
+}
+
+.iconeSucesso{
+
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #0056c6;
+
+    color: white;
+
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.janelaProtocolo h2{
+
+    color: #0A194E;
+
+    margin-bottom: 15px;
+}
+
+.janelaProtocolo p{
+
+    color: #334155;
+
+    line-height: 1.5;
+}
+
+.tituloProtocolo{
+
+    margin-top: 25px;
+
+    font-weight: bold;
+}
+
+#codigoProtocolo{
+
+    display: block;
+
+    margin: 15px 0;
+
+    padding: 15px;
+
+    background: #0A194E;
+
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 25px;
+
+    letter-spacing: 3px;
+
+    user-select: all;
+}
+
+.avisoProtocolo{
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+.btnProtocolo{
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #0056c6;
+
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.btnProtocolo:hover{
+
+    background: #00439b;
+}
+
+@keyframes aparecerProtocolo{
+
+    from{
+
+        opacity: 0;
+        transform: scale(.9);
+
+    }
+
+    to{
+
+        opacity: 1;
+        transform: scale(1);
+
+    }
+
+}
+/* ==========================
+JANELA DE COMENTÁRIO
+========================== */
+
+.modalComentario{
+    position: fixed;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, .65);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    z-index: 999;
+}
+
+.modalComentario.ativo{
+    display: flex;
+}
+
+.janelaComentario{
+    width: 90%;
+    max-width: 500px;
+
+    background-color: #E2E8F0;
+
+    border-radius: 1.5625rem;
+
+    padding: 2rem;
+
+    position: relative;
+
+    animation: abrirJanelaComentario .35s ease;
+}
+
+.fecharComentario{
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    width: 2.7rem;
+    height: 2.7rem;
+
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color: #0A194E;
+
+    color: white;
+
+    font-size: 1rem;
+}
+
+.janelaComentario h2{
+    color: #0A194E;
+
+    text-align: center;
+
+    margin-bottom: 2rem;
+
+    padding: 0 3rem;
+}
+
+.campoComentario{
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1.5rem;
+}
+
+.campoComentario label{
+    color: #0A194E;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    margin-bottom: .6rem;
+}
+
+.campoComentario input,
+.campoComentario textarea{
+    width: 100%;
+
+    padding: .9rem;
+
+    border: 1px solid #cbd5e1;
+    border-radius: .8rem;
+
+    background-color: white;
+
+    color: #0A194E;
+
+    font-size: 1rem;
+
+    outline: none;
+}
+
+.campoComentario textarea{
+    resize: none;
+}
+
+.campoComentario input:focus,
+.campoComentario textarea:focus{
+    border-color: #0056c6;
+
+    box-shadow: 0 0 0 3px rgba(0, 86, 198, .20);
+}
+
+.contadorComentario{
+    color: #475569;
+
+    font-size: .9rem;
+
+    text-align: right;
+
+    margin-top: .4rem;
+}
+
+.botaoPublicarComentario{
+    width: 100%;
+
+    padding: .9rem;
+
+    background-color: #0056c6;
+
+    border-radius: .8rem;
+
+    font-size: 1.1rem;
+}
+
+.botaoPublicarComentario:hover{
+    background-color: #00439b;
+}
+
+@keyframes abrirJanelaComentario{
+
+    from{
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+/* ==========================
+JANELA DE EDITAR COMENTÁRIOS
+========================== */
+
+.modalEditar{
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    background-color: rgba(0, 0, 0, .65);
+
+    z-index: 999;
+}
+
+.modalEditar.ativo{
+    display: flex;
+}
+
+.janelaEditar{
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 2rem;
+
+    position: relative;
+
+    background-color: #E2E8F0;
+
+    border-radius: 1.5625rem;
+
+    animation: abrirJanelaEditar .35s ease;
+}
+
+.fecharEditar{
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    width: 2.7rem;
+    height: 2.7rem;
+
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color: #0A194E;
+
+    color: white;
+}
+
+.janelaEditar h2{
+    padding: 0 3rem;
+
+    color: #0A194E;
+
+    text-align: center;
+
+    margin-bottom: .7rem;
+}
+
+.descricaoEditar{
+    color: #475569;
+
+    text-align: center;
+
+    margin-bottom: 1.5rem;
+}
+
+.itemEditarComentario{
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    background-color: white;
+
+    border-radius: 1rem;
+
+    margin-bottom: 1rem;
+
+    box-shadow: 0 4px 12px rgba(10, 25, 78, .10);
+}
+
+.conteudoEditarComentario{
+    min-width: 0;
+    flex: 1;
+}
+
+.conteudoEditarComentario h3{
+    color: #0A194E;
+
+    font-size: 1.1rem;
+
+    margin-bottom: .4rem;
+}
+
+.conteudoEditarComentario p{
+    color: #334155;
+
+    overflow-wrap: anywhere;
+}
+
+.botaoApagarComentario{
+    padding: .7rem 1.2rem;
+
+    flex-shrink: 0;
+
+    background-color: #b91c1c;
+
+    border-radius: .8rem;
+}
+
+.botaoApagarComentario:hover{
+    background-color: #991b1b;
+}
+
+.semComentarios{
+    padding: 2rem;
+
+    color: #475569;
+
+    text-align: center;
+
+    background-color: white;
+
+    border-radius: 1rem;
+}
+
+@keyframes abrirJanelaEditar{
+
+    from{
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@media(max-width: 500px){
+
+    .itemEditarComentario{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botaoApagarComentario{
+        width: 100%;
+    }
+
+}
+/* ==========================
+JANELA PARA PUBLICAR NOTÍCIA
+========================== */
+
+.modalNoticia,
+.modalEditarNoticias{
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    background-color: rgba(0, 0, 0, .65);
+
+    z-index: 999;
+}
+
+.modalNoticia.ativo,
+.modalEditarNoticias.ativo{
+    display: flex;
+}
+
+.janelaNoticia,
+.janelaEditarNoticias{
+    width: 90%;
+    max-width: 550px;
+
+    padding: 2rem;
+
+    position: relative;
+
+    background-color: #E2E8F0;
+
+    border-radius: 1.5625rem;
+
+    animation: abrirJanelaNoticia .35s ease;
+}
+
+.janelaEditarNoticias{
+    max-height: 90vh;
+
+    overflow-y: auto;
+}
+
+.fecharNoticia,
+.fecharEditarNoticias{
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    width: 2.7rem;
+    height: 2.7rem;
+
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color: #0A194E;
+
+    color: white;
+}
+
+.janelaNoticia h2,
+.janelaEditarNoticias h2{
+    padding: 0 3rem;
+
+    color: #0A194E;
+
+    text-align: center;
+
+    margin-bottom: 1.5rem;
+}
+
+.campoNoticia{
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1.5rem;
+}
+
+.campoNoticia label{
+    color: #0A194E;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    margin-bottom: .6rem;
+}
+
+.campoNoticia textarea{
+    width: 100%;
+
+    padding: .9rem;
+
+    border: 1px solid #cbd5e1;
+    border-radius: .8rem;
+
+    background-color: white;
+
+    color: #0A194E;
+
+    font-size: 1rem;
+
+    resize: none;
+    outline: none;
+}
+
+.campoNoticia textarea:focus{
+    border-color: #0056c6;
+
+    box-shadow: 0 0 0 3px rgba(0, 86, 198, .20);
+}
+
+.contadorNoticia{
+    margin-top: .4rem;
+
+    color: #475569;
+
+    font-size: .9rem;
+
+    text-align: right;
+}
+
+.botaoPublicarNoticia{
+    width: 100%;
+
+    padding: .9rem;
+
+    background-color: #0056c6;
+
+    border-radius: .8rem;
+
+    font-size: 1.1rem;
+}
+
+.botaoPublicarNoticia:hover{
+    background-color: #00439b;
+}
+
+/* ==========================
+LISTA PARA APAGAR NOTÍCIAS
+========================== */
+
+.descricaoEditarNoticias{
+    color: #475569;
+
+    text-align: center;
+
+    margin-bottom: 1.5rem;
+}
+
+.itemEditarNoticia{
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    background-color: white;
+
+    border-radius: 1rem;
+
+    margin-bottom: 1rem;
+
+    box-shadow: 0 4px 12px rgba(10, 25, 78, .10);
+}
+
+.textoEditarNoticia{
+    min-width: 0;
+    flex: 1;
+
+    color: #334155;
+
+    overflow-wrap: anywhere;
+}
+
+.botaoApagarNoticia{
+    padding: .7rem 1.2rem;
+
+    flex-shrink: 0;
+
+    background-color: #b91c1c;
+
+    border-radius: .8rem;
+}
+
+.botaoApagarNoticia:hover{
+    background-color: #991b1b;
+}
+
+.semNoticias{
+    padding: 2rem;
+
+    color: #475569;
+
+    text-align: center;
+
+    background-color: white;
+
+    border-radius: 1rem;
+}
+
+@keyframes abrirJanelaNoticia{
+
+    from{
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+@media(max-width: 500px){
+
+    .itemEditarNoticia{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botaoApagarNoticia{
+        width: 100%;
+    }
+
+}
+
+/* ==========================
+   TABLETS
+========================== */
+
+@media (max-width: 992px){
+
+    .containners{
+        gap: 2rem;
+    }
+
+    .contanner1,
+    .contanner2,
+    .contanner3{
+        width: 45%;
+    }
+
+    .botao button{
+        padding: 1rem 3.5rem;
+    }
+}
+
+/* ==========================
+   CELULARES
+========================== */
+
+@media (max-width: 768px){
+
+    header{
+        padding: 1.25rem;
+    }
+
+    .containners{
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    .contanner1,
+    .contanner2,
+    .contanner3{
+        width: 100%;
+        max-width: 22rem;
+    }
+
+    .botao{
+        margin-top: 3rem;
+    }
+
+    .botao button{
+        width: 100%;
+        max-width: 22rem;
+        padding: 1rem;
+    }
+}

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/estudante.css">
+    <link rel="stylesheet" href="styles/denuncias.css">
     <title>Acompanhar Denúncia</title>
 </head>
 
@@ -58,7 +59,7 @@
 
                     <div class="botaoComente">
 
-                        <button>Comente</button>
+                        <button type="button" id="abrirComentario">Comente</button>
 
                     </div>
 
@@ -115,6 +116,77 @@
         </section>
 
     </main>
+
+    <!-- JANELA DE COMENTÁRIO -->
+
+<div class="modalComentario" id="modalComentario">
+
+    <div class="janelaComentario">
+
+        <button
+            type="button"
+            class="fecharComentario"
+            id="fecharComentario"
+        >
+            ✕
+        </button>
+
+        <h2>Deixe seu comentário</h2>
+
+        <form id="formComentario">
+
+            <div class="campoComentario">
+
+                <label for="nomeUsuario">
+                    Nome de usuário
+                </label>
+
+                <input
+                    type="text"
+                    id="nomeUsuario"
+                    placeholder="Exemplo: Gabriel"
+                    maxlength="20"
+                    required
+                >
+
+            </div>
+
+            <div class="campoComentario">
+
+                <label for="textoComentario">
+                    Comentário
+                </label>
+
+                <textarea
+                    id="textoComentario"
+                    rows="5"
+                    maxlength="60"
+                    placeholder="Escreva seu comentário..."
+                    required
+                ></textarea>
+
+                <div class="contadorComentario">
+
+                    <span id="quantidadeCaracteres">0</span>/60
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="botaoPublicarComentario"
+            >
+                Comentar
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/comentarios.js"></script>
 
 </body>
 

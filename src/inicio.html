@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/inicio.css">
+    <link rel="stylesheet" href="styles/denuncias.css">
     <title>Inicio</title>
 </head>
 <body>
@@ -102,7 +103,7 @@
 
         <h2>Denúncia Anônima</h2>
 
-        <form>
+        <form id="formDenuncia">
 
             <div class="campo">
                 <label>Usuário</label>
@@ -113,7 +114,6 @@
                 <label>Onde ocorreu?</label>
 
                 <select required>
-                    <option>Selecione</option>
                     <option>Sala</option>
                     <option>Pátio</option>
                     <option>Corredor</option>
@@ -133,7 +133,6 @@
                 <label>Tipo de Bullying</label>
 
                 <select>
-                    <option>Selecione</option>
                     <option>Verbal</option>
                     <option>Físico</option>
                     <option>Psicológico</option>
@@ -148,11 +147,51 @@
                 <textarea rows="6" required></textarea>
             </div>
 
-            <button class="btnEnviar">
+            <button class="btnEnviar" type="submit">
                 Enviar Denúncia
             </button>
 
+        
         </form>
+
+
+    </div>
+
+</div>
+
+<!-- JANELA DO PROTOCOLO -->
+
+<div class="modal" id="modalProtocolo">
+
+    <div class="janelaProtocolo">
+
+        <button class="fechar" id="fecharProtocolo">
+            ✕
+        </button>
+
+        <div class="iconeSucesso">
+            ✓
+        </div>
+
+        <h2>Denúncia enviada!</h2>
+
+        <p>
+            Sua denúncia foi registrada com sucesso.
+        </p>
+
+        <p class="tituloProtocolo">
+            Seu número de protocolo é:
+        </p>
+
+        <strong id="codigoProtocolo"></strong>
+
+        <p class="avisoProtocolo">
+            Guarde este código para futuras consultas.
+        </p>
+
+        <button type="button" class="btnProtocolo" id="confirmarProtocolo">
+            Entendi
+        </button>
 
     </div>
 

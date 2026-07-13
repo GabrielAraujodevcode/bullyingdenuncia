@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/servicos.css">
+    <link rel="stylesheet" href="styles/denuncias.css">
     <title>servicos</title>
 </head>
 <body>
@@ -47,9 +48,9 @@
                 
                </div>
 
-               <p> Acompanhe denuncias , receba <br> atualizações e contribua para uma <br> escola mais segura</p>
+               <p> Encontre orientação e apoio <br> para lidar com as situações <br> de Bullying</p>
                
-               <a href="estudante.html"> <button> Veja </button></a>
+               <a href="doc/Guia_Completo_Apoio_Vitimas_Bullying.pdf"> <button> Veja </button></a>
 
             </div>
 
@@ -63,9 +64,8 @@
                 
                </div>
 
-               <p> Gerencie denuncias, acompanhe <br> ocorrências e facilite a comunicação <br> com a comunidade escolar</p>
-               
-              <a href="secretaria.html"> <button>  Veja </button></a>
+               <p> Aprenda a reconhecer os  <br> Sinais de Bullying e  <br> como agir </p>
+              <a href="doc/Saiba_Identificar_e_Combater_o_Bullying.pdf"> <button>  Veja </button></a>
 
 
             </div>
@@ -95,7 +95,7 @@
 
         <h2>Denúncia Anônima</h2>
 
-        <form>
+        <form id="formDenuncia">
 
             <div class="campo">
                 <label>Usuário</label>
@@ -141,11 +141,48 @@
                 <textarea rows="6"></textarea>
             </div>
 
-            <button class="btnEnviar">
+            <button class="btnEnviar" type="submit">
                 Enviar Denúncia
             </button>
 
         </form>
+
+    </div>
+
+</div>
+<!-- JANELA DO PROTOCOLO -->
+
+<div class="modal" id="modalProtocolo">
+
+    <div class="janelaProtocolo">
+
+        <button class="fechar" id="fecharProtocolo">
+            ✕
+        </button>
+
+        <div class="iconeSucesso">
+            ✓
+        </div>
+
+        <h2>Denúncia enviada!</h2>
+
+        <p>
+            Sua denúncia foi registrada com sucesso.
+        </p>
+
+        <p class="tituloProtocolo">
+            Seu número de protocolo é:
+        </p>
+
+        <strong id="codigoProtocolo"></strong>
+
+        <p class="avisoProtocolo">
+            Guarde este código para futuras consultas.
+        </p>
+
+        <button type="button" class="btnProtocolo" id="confirmarProtocolo">
+            Entendi
+        </button>
 
     </div>
 
