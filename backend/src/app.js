@@ -1,7 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 
-const denunciaRoutes = require("./routes/denunciaRoutes");
+const denunciaRoutes = require(
+    "./routes/denunciaRoutes"
+);
+
+const authRoutes = require(
+    "./routes/authRoutes"
+);
+const comentarioRoutes = require(
+    "./routes/comentarioRoutes"
+);
 
 const app = express();
 
@@ -15,6 +24,18 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-app.use("/api/denuncias", denunciaRoutes);
+app.use(
+    "/api/denuncias",
+    denunciaRoutes
+);
+
+app.use(
+    "/api/auth",
+    authRoutes
+);
+app.use(
+    "/api/comentarios",
+    comentarioRoutes
+);
 
 module.exports = app;

@@ -1,5 +1,24 @@
 const API_URL = "http://localhost:3000/api";
 
+function obterHeaders() {
+
+    const token =
+        localStorage.getItem(
+            "tokenAdministrador"
+        );
+
+    const headers = {
+        "Content-Type": "application/json"
+    };
+
+    if (token) {
+        headers.Authorization =
+            `Bearer ${token}`;
+    }
+
+    return headers;
+}
+
 window.Api = {
 
     /* ==========================
@@ -9,7 +28,10 @@ window.Api = {
     async listarDenuncias() {
 
         const resposta = await fetch(
-            `${API_URL}/denuncias`
+            `${API_URL}/denuncias`,
+            {
+                headers: obterHeaders()
+            }
         );
 
         const resultado = await resposta.json();
@@ -24,10 +46,14 @@ window.Api = {
         return resultado.denuncias;
     },
 
+
     async buscarDenuncia(protocolo) {
 
         const resposta = await fetch(
-            `${API_URL}/denuncias/protocolo/${encodeURIComponent(protocolo)}`
+            `${API_URL}/denuncias/protocolo/${encodeURIComponent(protocolo)}`,
+            {
+                headers: obterHeaders()
+            }
         );
 
         const resultado = await resposta.json();
@@ -42,6 +68,7 @@ window.Api = {
         return resultado.denuncia;
     },
 
+
     async atualizarDenuncia(id, dados) {
 
         const resposta = await fetch(
@@ -49,9 +76,7 @@ window.Api = {
             {
                 method: "PATCH",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: obterHeaders(),
 
                 body: JSON.stringify(dados)
             }

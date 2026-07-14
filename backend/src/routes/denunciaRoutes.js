@@ -6,22 +6,35 @@ const denunciaController = require(
     "../controllers/denunciaController"
 );
 
+const {
+    autenticarAdministrador
+} = require("../middlewares/authMiddleware");
+
+
+/* ROTAS PÚBLICAS */
+
 router.post(
     "/",
     denunciaController.criarDenuncia
 );
 
 router.get(
-    "/",
-    denunciaController.listarDenuncias
-);
-
-router.get(
     "/protocolo/:protocolo",
     denunciaController.buscarDenunciaPorProtocolo
 );
+
+
+/* ROTAS PRIVADAS */
+
+router.get(
+    "/",
+    autenticarAdministrador,
+    denunciaController.listarDenuncias
+);
+
 router.patch(
     "/:id",
+    autenticarAdministrador,
     denunciaController.atualizarDenuncia
 );
 

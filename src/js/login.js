@@ -1,174 +1,145 @@
-const formLogin =
+const API_URL = "http://localhost:3000/api";
+
+const formularioLogin =
     document.getElementById("formLogin");
 
-const campoUsuario =
-    document.getElementById("usuario");
+const campoEmail =
+    document.getElementById("email");
 
 const campoSenha =
     document.getElementById("senha");
 
-const mostrarSenha =
-    document.getElementById("mostrarSenha");
+const botaoEntrar =
+    formularioLogin.querySelector(
+        'button[type="submit"]'
+    );
 
 const mensagemLogin =
     document.getElementById("mensagemLogin");
 
-const botaoEntrar =
-    document.querySelector(".botaoEntrar");
+const botaoMostrarSenha =
+    document.getElementById("mostrarSenha");
 
 
-/* ==========================
-DADOS TEMPORÁRIOS DE ACESSO
-========================== */
+async function realizarLogin(email, senha) {
 
-const usuarioCorreto = "secretaria";
-const senhaCorreta = "123456";
+    const resposta = await fetch(
+        `${API_URL}/auth/login`,
+        {
+            method: "POST",
 
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-/* ==========================
-MOSTRAR OU ESCONDER SENHA
-========================== */
-
-mostrarSenha.addEventListener("click", () => {
-
-    const senhaEstaVisivel =
-        campoSenha.type === "text";
-
-
-    if(senhaEstaVisivel){
-
-        campoSenha.type = "password";
-
-        mostrarSenha.textContent = "👁";
-
-        mostrarSenha.setAttribute(
-            "aria-label",
-            "Mostrar senha"
-        );
-
-    }else{
-
-        campoSenha.type = "text";
-
-        mostrarSenha.textContent = "🙈";
-
-        mostrarSenha.setAttribute(
-            "aria-label",
-            "Esconder senha"
-        );
-
-    }
-
-});
-
-
-/* ==========================
-EXIBIR MENSAGEM
-========================== */
-
-function exibirMensagem(texto, tipo){
-
-    mensagemLogin.textContent = texto;
-
-    mensagemLogin.classList.remove(
-        "mensagemErro",
-        "mensagemSucesso"
+            body: JSON.stringify({
+                email,
+                senha
+            })
+        }
     );
 
+    const resultado = await resposta.json();
 
-    if(tipo === "erro"){
-
-        mensagemLogin.classList.add(
-            "mensagemErro"
+    if (!resposta.ok) {
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível realizar o login."
         );
-
     }
 
-
-    if(tipo === "sucesso"){
-
-        mensagemLogin.classList.add(
-            "mensagemSucesso"
-        );
-
-    }
-
+    return resultado;
 }
 
 
-/* ==========================
-REALIZAR LOGIN
-========================== */
+formularioLogin.addEventListener(
+    "submit",
+    async (evento) => {
 
-formLogin.addEventListener("submit", (evento) => {
+        evento.preventDefault();
 
-    evento.preventDefault();
+        const email =
+            campoEmail.value.trim();
 
+        const senha =
+            campoSenha.value;
 
-    const usuarioDigitado =
-        campoUsuario.value.trim();
+        mensagemLogin.textContent = "";
 
-    const senhaDigitada =
-        campoSenha.value.trim();
+        if (!email || !senha) {
 
+            mensagemLogin.textContent =
+                "Preencha o e-mail e a senha.";
 
-    if(
-        usuarioDigitado === "" ||
-        senhaDigitada === ""
-    ){
+            return;
+        }
 
-        exibirMensagem(
-            "Preencha o usuário e a senha.",
-            "erro"
-        );
+        try {
 
-        return;
+            botaoEntrar.disabled = true;
 
+            botaoEntrar.textContent =
+                "Entrando...";
+
+            const resultado =
+                await realizarLogin(
+                    email,
+                    senha
+                );
+
+            localStorage.setItem(
+                "tokenAdministrador",
+                resultado.token
+            );
+
+            localStorage.setItem(
+                "administrador",
+                JSON.stringify(
+                    resultado.administrador
+                )
+            );
+
+            window.location.href =
+                "Secretaria.html";
+
+        } catch (erro) {
+
+            mensagemLogin.textContent =
+                erro.message;
+
+        } finally {
+
+            botaoEntrar.disabled = false;
+
+            botaoEntrar.textContent =
+                "Entrar";
+        }
     }
+);
 
 
-    if(
-        usuarioDigitado !== usuarioCorreto ||
-        senhaDigitada !== senhaCorreta
-    ){
+botaoMostrarSenha.addEventListener(
+    "click",
+    () => {
 
-        exibirMensagem(
-            "Usuário ou senha incorretos.",
-            "erro"
+        const senhaVisivel =
+            campoSenha.type === "text";
+
+        campoSenha.type =
+            senhaVisivel
+                ? "password"
+                : "text";
+
+        botaoMostrarSenha.textContent =
+            senhaVisivel
+                ? "👁"
+                : "X";
+
+        botaoMostrarSenha.setAttribute(
+            "aria-label",
+            senhaVisivel
+                ? "Mostrar senha"
+                : "Ocultar senha"
         );
-
-        campoSenha.value = "";
-
-        campoSenha.focus();
-
-        return;
-
     }
-
-
-    exibirMensagem(
-        "Login realizado com sucesso!",
-        "sucesso"
-    );
-
-
-    botaoEntrar.disabled = true;
-
-    botaoEntrar.textContent =
-        "Entrando...";
-
-
-    localStorage.setItem(
-        "secretariaLogada",
-        "true"
-    );
-
-
-    setTimeout(() => {
-
-        window.location.href =
-            "secretaria.html";
-
-    }, 1000);
-
-});
+);
