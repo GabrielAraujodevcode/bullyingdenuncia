@@ -1,104 +1,181 @@
+const API_URL = "http://localhost:3000/api";
+
 const abrir = document.getElementById("abrirFormulario");
 const fechar = document.getElementById("fecharFormulario");
 const modal = document.getElementById("modal");
 
 const formulario = document.getElementById("formDenuncia");
 
-const modalProtocolo = document.getElementById("modalProtocolo");
-const fecharProtocolo = document.getElementById("fecharProtocolo");
-const confirmarProtocolo = document.getElementById("confirmarProtocolo");
-const codigoProtocolo = document.getElementById("codigoProtocolo");
+const modalProtocolo =
+    document.getElementById("modalProtocolo");
 
+const fecharProtocolo =
+    document.getElementById("fecharProtocolo");
+
+const confirmarProtocolo =
+    document.getElementById("confirmarProtocolo");
+
+const codigoProtocolo =
+    document.getElementById("codigoProtocolo");
+
+const botaoEnviar =
+    formulario.querySelector(".btnEnviar");
+
+
+/* ==========================
+ABRIR FORMULÁRIO
+========================== */
 
 abrir.addEventListener("click", () => {
-
     modal.classList.add("ativo");
-
 });
 
 
-fechar.addEventListener("click", () => {
+/* ==========================
+FECHAR FORMULÁRIO
+========================== */
 
+function fecharFormulario() {
     modal.classList.remove("ativo");
+}
 
+fechar.addEventListener("click", fecharFormulario);
+
+modal.addEventListener("click", (evento) => {
+    if (evento.target === modal) {
+        fecharFormulario();
+    }
 });
 
 
-modal.addEventListener("click", (e) => {
+/* ==========================
+CAPTURAR DADOS
+========================== */
 
-    if(e.target === modal){
+function obterDadosFormulario() {
+    return {
+        usuarioAnonimo:
+            document
+                .getElementById("usuarioAnonimo")
+                .value
+                .trim(),
 
-        modal.classList.remove("ativo");
+        localOcorrencia:
+            document
+                .getElementById("localOcorrencia")
+                .value,
 
-    }
+        agressorDescricao:
+            document
+                .getElementById("agressorDescricao")
+                .value
+                .trim(),
 
-});
+        tipoBullying:
+            document
+                .getElementById("tipoBullying")
+                .value,
 
-
-function gerarProtocolo(){
-
-    const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    let primeiraParte = "";
-    let segundaParte = "";
-    let terceiraParte = "";
-
-    for(let i = 0; i < 4; i++){
-
-        primeiraParte += caracteres[
-            Math.floor(Math.random() * caracteres.length)
-        ];
-
-        segundaParte += caracteres[
-            Math.floor(Math.random() * caracteres.length)
-        ];
-
-        terceiraParte += caracteres[
-            Math.floor(Math.random() * caracteres.length)
-        ];
-
-    }
-
-    return `DEN-${primeiraParte}-${segundaParte}-${terceiraParte}`;
-
+        relato:
+            document
+                .getElementById("relato")
+                .value
+                .trim()
+    };
 }
 
 
-formulario.addEventListener("submit", (e) => {
+/* ==========================
+ENVIAR PARA A API
+========================== */
 
-    e.preventDefault();
+async function enviarDenuncia(dados) {
+    const resposta = await fetch(
+        `${API_URL}/denuncias`,
+        {
+            method: "POST",
 
-    const novoProtocolo = gerarProtocolo();
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    codigoProtocolo.textContent = novoProtocolo;
+            body: JSON.stringify(dados)
+        }
+    );
 
-    modal.classList.remove("ativo");
+    const resultado = await resposta.json();
 
-    modalProtocolo.classList.add("ativo");
+    if (!resposta.ok) {
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível enviar a denúncia."
+        );
+    }
 
-    formulario.reset();
+    return resultado;
+}
 
-});
+
+/* ==========================
+SUBMIT DO FORMULÁRIO
+========================== */
+
+formulario.addEventListener(
+    "submit",
+    async (evento) => {
+        evento.preventDefault();
+
+        const dados = obterDadosFormulario();
+
+        try {
+            botaoEnviar.disabled = true;
+            botaoEnviar.textContent = "Enviando...";
+
+            const resultado =
+                await enviarDenuncia(dados);
+
+            codigoProtocolo.textContent =
+                resultado.denuncia.protocolo;
+
+            fecharFormulario();
+
+            modalProtocolo.classList.add("ativo");
+
+            formulario.reset();
+        } catch (erro) {
+            alert(erro.message);
+        } finally {
+            botaoEnviar.disabled = false;
+            botaoEnviar.textContent =
+                "Enviar Denúncia";
+        }
+    }
+);
 
 
-function encerrarProtocolo(){
+/* ==========================
+FECHAR PROTOCOLO
+========================== */
 
+function encerrarProtocolo() {
     modalProtocolo.classList.remove("ativo");
-
 }
 
+fecharProtocolo.addEventListener(
+    "click",
+    encerrarProtocolo
+);
 
-fecharProtocolo.addEventListener("click", encerrarProtocolo);
+confirmarProtocolo.addEventListener(
+    "click",
+    encerrarProtocolo
+);
 
-confirmarProtocolo.addEventListener("click", encerrarProtocolo);
-
-
-modalProtocolo.addEventListener("click", (e) => {
-
-    if(e.target === modalProtocolo){
-
-        encerrarProtocolo();
-
+modalProtocolo.addEventListener(
+    "click",
+    (evento) => {
+        if (evento.target === modalProtocolo) {
+            encerrarProtocolo();
+        }
     }
-
-});
+);

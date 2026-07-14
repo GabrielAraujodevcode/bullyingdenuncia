@@ -106,54 +106,94 @@
 
         <form id="formDenuncia">
 
-            <div class="campo">
-                <label>Usuário</label>
-                <input type="text" placeholder="Crie um nome de usuário" required>
-            </div>
+    <div class="campo">
+        <label for="usuarioAnonimo">Usuário</label>
 
-            <div class="campo">
-                <label>Onde ocorreu?</label>
+        <input
+            type="text"
+            id="usuarioAnonimo"
+            name="usuarioAnonimo"
+            placeholder="Crie um nome de usuário"
+            maxlength="50"
+            required
+        >
+    </div>
 
-                <select required>
-                    <option>Sala</option>
-                    <option>Pátio</option>
-                    <option>Corredor</option>
-                    <option>Banheiro</option>
-                    <option>Internet</option>
-                    <option>Outro</option>
-                </select>
-            </div>
+    <div class="campo">
+        <label for="localOcorrencia">
+            Onde ocorreu?
+        </label>
 
-            <div class="campo">
-                <label>Quem praticou?</label>
+        <select
+            id="localOcorrencia"
+            name="localOcorrencia"
+            required
+        >
+            <option value="">Selecione</option>
+            <option value="Sala">Sala</option>
+            <option value="Pátio">Pátio</option>
+            <option value="Corredor">Corredor</option>
+            <option value="Banheiro">Banheiro</option>
+            <option value="Internet">Internet</option>
+            <option value="Outro">Outro</option>
+        </select>
+    </div>
 
-                <textarea rows="3" required></textarea>
-            </div>
+    <div class="campo">
+        <label for="agressorDescricao">
+            Quem praticou?
+        </label>
 
-            <div class="campo">
-                <label>Tipo de Bullying</label>
+        <textarea
+            id="agressorDescricao"
+            name="agressorDescricao"
+            rows="3"
+            maxlength="500"
+            required
+        ></textarea>
+    </div>
 
-                <select>
-                    <option>Verbal</option>
-                    <option>Físico</option>
-                    <option>Psicológico</option>
-                    <option>Social</option>
-                    <option>Cyberbullying</option>
-                </select>
-            </div>
+    <div class="campo">
+        <label for="tipoBullying">
+            Tipo de Bullying
+        </label>
 
-            <div class="campo">
-                <label>Relato</label>
+        <select
+            id="tipoBullying"
+            name="tipoBullying"
+            required
+        >
+            <option value="">Selecione</option>
+            <option value="Verbal">Verbal</option>
+            <option value="Físico">Físico</option>
+            <option value="Psicológico">Psicológico</option>
+            <option value="Social">Social</option>
+            <option value="Cyberbullying">
+                Cyberbullying
+            </option>
+        </select>
+    </div>
 
-                <textarea rows="6" required></textarea>
-            </div>
+    <div class="campo">
+        <label for="relato">Relato</label>
 
-            <button class="btnEnviar" type="submit">
-                Enviar Denúncia
-            </button>
+        <textarea
+            id="relato"
+            name="relato"
+            rows="6"
+            maxlength="2000"
+            required
+        ></textarea>
+    </div>
 
-        
-        </form>
+    <button
+        class="btnEnviar"
+        type="submit"
+    >
+        Enviar Denúncia
+    </button>
+
+</form>
 
 
     </div>

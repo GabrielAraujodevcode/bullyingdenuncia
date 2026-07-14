@@ -4,21 +4,19 @@ ATUALIZAR DENÚNCIA
 
 window.DenunciaSecretariaAtualizar = {
 
-    atualizarContador(){
+    atualizarContador() {
 
         const elementos =
             window.DenunciaSecretariaElementos;
 
         elementos.contador.textContent =
             elementos.mensagem.value.length;
-
     },
 
 
-    salvarAtualizacao(evento){
+    async salvarAtualizacao(evento) {
 
         evento.preventDefault();
-
 
         const elementos =
             window.DenunciaSecretariaElementos;
@@ -27,17 +25,14 @@ window.DenunciaSecretariaAtualizar = {
             window.DenunciaSecretariaModal
                 .protocoloSelecionado;
 
-
-        if(!protocolo){
+        if (!protocolo) {
 
             alert(
                 "Nenhuma denúncia foi selecionada."
             );
 
             return;
-
         }
-
 
         const mensagem =
             elementos.mensagem.value.trim();
@@ -45,8 +40,7 @@ window.DenunciaSecretariaAtualizar = {
         const status =
             elementos.status.value;
 
-
-        if(mensagem === ""){
+        if (mensagem === "") {
 
             alert(
                 "Digite uma mensagem para o aluno."
@@ -55,79 +49,73 @@ window.DenunciaSecretariaAtualizar = {
             elementos.mensagem.focus();
 
             return;
-
         }
 
-
-        if(mensagem.length > 300){
+        if (mensagem.length > 300) {
 
             alert(
                 "A mensagem deve ter no máximo 300 caracteres."
             );
 
             return;
-
         }
 
+        try {
 
-        const atualizou =
-            window.DenunciasStorage.atualizar(
-                protocolo,
+            const denuncia =
+                await window.Api.buscarDenuncia(
+                    protocolo
+                );
+
+            await window.Api.atualizarDenuncia(
+                denuncia.id,
                 {
                     status,
                     mensagem
                 }
             );
 
+            await window
+                .DenunciaSecretariaTabela
+                .montar();
 
-        if(!atualizou){
+            window
+                .DenunciaSecretariaModal
+                .fechar();
 
             alert(
-                "Não foi possível atualizar a denúncia."
+                "Denúncia atualizada com sucesso!"
             );
 
-            return;
+        } catch (erro) {
 
+            console.error(erro);
+
+            alert(
+                erro.message ||
+                "Não foi possível atualizar a denúncia."
+            );
         }
-
-
-        window.DenunciaSecretariaTabela.montar();
-
-        window.DenunciaSecretariaModal.fechar();
-
-
-        alert(
-            "Denúncia atualizada com sucesso!"
-        );
-
     },
 
 
-    iniciar(){
+    iniciar() {
 
         const elementos =
             window.DenunciaSecretariaElementos;
 
-
         elementos.mensagem.addEventListener(
             "input",
             () => {
-
                 this.atualizarContador();
-
             }
         );
-
 
         elementos.formulario.addEventListener(
             "submit",
             (evento) => {
-
                 this.salvarAtualizacao(evento);
-
             }
         );
-
     }
-
 };

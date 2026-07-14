@@ -4,146 +4,186 @@ TABELA DE DENÚNCIAS
 
 window.DenunciaSecretariaTabela = {
 
-    obterClasseStatus(status){
+    formatarStatus(statusBanco) {
 
-        if(status === "Em andamento"){
+        const status = statusBanco
+            ?.trim()
+            .toLowerCase();
 
-            return "statusAndamento";
-
+        if (
+            status === "recebida" ||
+            status === "em_analise" ||
+            status === "em análise"
+        ) {
+            return "Em análise";
         }
 
-        if(status === "Concluída"){
+        if (
+            status === "em_andamento" ||
+            status === "em andamento" ||
+            status === "em_acompanhamento"
+        ) {
+            return "Em andamento";
+        }
 
+        if (
+            status === "concluida" ||
+            status === "concluída" ||
+            status === "resolvida"
+        ) {
+            return "Concluída";
+        }
+
+        return "Em análise";
+    },
+
+    obterClasseStatus(status) {
+
+        if (status === "Em andamento") {
+            return "statusAndamento";
+        }
+
+        if (status === "Concluída") {
             return "statusConcluida";
-
         }
 
         return "statusAnalise";
-
     },
 
-
-    montar(){
+    async montar() {
 
         const elementos =
             window.DenunciaSecretariaElementos;
 
-        const denuncias =
-            window.DenunciasStorage.carregar();
-
-
         elementos.lista.innerHTML = "";
 
+        try {
 
-        if(denuncias.length === 0){
+            const denuncias =
+                await window.Api.listarDenuncias();
 
-            const linha =
-                document.createElement("tr");
+            if (denuncias.length === 0) {
 
-            const coluna =
-                document.createElement("td");
+                const linha =
+                    document.createElement("tr");
 
+                const coluna =
+                    document.createElement("td");
 
-            coluna.colSpan = 3;
+                coluna.colSpan = 3;
 
-            coluna.textContent =
-                "Nenhuma denúncia registrada.";
+                coluna.textContent =
+                    "Nenhuma denúncia registrada.";
 
-            coluna.style.textAlign = "center";
+                coluna.style.textAlign = "center";
 
+                linha.appendChild(coluna);
 
-            linha.appendChild(coluna);
+                elementos.lista.appendChild(linha);
 
-            elementos.lista.appendChild(linha);
+                return;
+            }
 
-            return;
+            denuncias.forEach((denuncia) => {
 
+                const linha =
+                    document.createElement("tr");
+
+                /* ======================
+                   PROTOCOLO
+                ====================== */
+
+                const colunaProtocolo =
+                    document.createElement("td");
+
+                colunaProtocolo.textContent =
+                    denuncia.protocolo;
+
+                /* ======================
+                   STATUS
+                ====================== */
+
+                const statusFormatado =
+                    this.formatarStatus(
+                        denuncia.status
+                    );
+
+                const colunaStatus =
+                    document.createElement("td");
+
+                const status =
+                    document.createElement("span");
+
+                status.classList.add(
+                    "statusTabela",
+                    this.obterClasseStatus(
+                        statusFormatado
+                    )
+                );
+
+                status.textContent =
+                    statusFormatado;
+
+                colunaStatus.appendChild(status);
+
+                /* ======================
+                   BOTÃO
+                ====================== */
+
+                const colunaAcao =
+                    document.createElement("td");
+
+                const botao =
+                    document.createElement("button");
+
+                botao.type = "button";
+
+                botao.classList.add(
+                    "botaoAveriguar"
+                );
+
+                botao.textContent =
+                    "Averiguar";
+
+                botao.addEventListener(
+                    "click",
+                    () => {
+
+                        window
+                            .DenunciaSecretariaModal
+                            .abrir(
+                                denuncia.protocolo
+                            );
+                    }
+                );
+
+                colunaAcao.appendChild(botao);
+
+                linha.append(
+                    colunaProtocolo,
+                    colunaStatus,
+                    colunaAcao
+                );
+
+                elementos.lista.appendChild(
+                    linha
+                );
+            });
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            elementos.lista.innerHTML = `
+                <tr>
+                    <td
+                        colspan="3"
+                        style="text-align:center;color:red;"
+                    >
+                        Erro ao carregar denúncias.
+                    </td>
+                </tr>
+            `;
         }
-
-
-        denuncias.forEach((denuncia) => {
-
-            const linha =
-                document.createElement("tr");
-
-
-            /* COLUNA DO PROTOCOLO */
-
-            const colunaProtocolo =
-                document.createElement("td");
-
-            colunaProtocolo.textContent =
-                denuncia.protocolo;
-
-
-            /* COLUNA DO STATUS */
-
-            const colunaStatus =
-                document.createElement("td");
-
-            const status =
-                document.createElement("span");
-
-            status.classList.add(
-                "statusTabela",
-                this.obterClasseStatus(
-                    denuncia.status
-                )
-            );
-
-            status.textContent =
-                denuncia.status;
-
-            colunaStatus.appendChild(status);
-
-
-            /* COLUNA DO BOTÃO */
-
-            const colunaAcao =
-                document.createElement("td");
-
-            const botaoAveriguar =
-                document.createElement("button");
-
-            botaoAveriguar.type = "button";
-
-            botaoAveriguar.classList.add(
-                "botaoAveriguar"
-            );
-
-            botaoAveriguar.textContent =
-                "Averiguar";
-
-
-            botaoAveriguar.addEventListener(
-                "click",
-                () => {
-
-                    window.DenunciaSecretariaModal
-                        .abrir(denuncia.protocolo);
-
-                }
-            );
-
-
-            colunaAcao.appendChild(
-                botaoAveriguar
-            );
-
-
-            linha.append(
-                colunaProtocolo,
-                colunaStatus,
-                colunaAcao
-            );
-
-
-            elementos.lista.appendChild(
-                linha
-            );
-
-        });
-
     }
-
 };
