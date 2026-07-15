@@ -12,11 +12,14 @@ function obterHeaders() {
     };
 
     if (token) {
+
         headers.Authorization =
             `Bearer ${token}`;
+
     }
 
     return headers;
+
 }
 
 window.Api = {
@@ -37,13 +40,16 @@ window.Api = {
         const resultado = await resposta.json();
 
         if (!resposta.ok) {
+
             throw new Error(
                 resultado.erro ||
                 "Erro ao listar denúncias."
             );
+
         }
 
         return resultado.denuncias;
+
     },
 
 
@@ -59,13 +65,16 @@ window.Api = {
         const resultado = await resposta.json();
 
         if (!resposta.ok) {
+
             throw new Error(
                 resultado.erro ||
                 "Denúncia não encontrada."
             );
+
         }
 
         return resultado.denuncia;
+
     },
 
 
@@ -85,13 +94,183 @@ window.Api = {
         const resultado = await resposta.json();
 
         if (!resposta.ok) {
+
             throw new Error(
                 resultado.erro ||
                 "Não foi possível atualizar a denúncia."
             );
+
         }
 
         return resultado.denuncia;
+
+    },
+
+
+    /* ==========================
+       COMENTÁRIOS
+    ========================== */
+
+    async listarComentarios() {
+
+        const resposta = await fetch(
+            `${API_URL}/comentarios`
+        );
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                resultado.erro ||
+                "Não foi possível carregar os comentários."
+            );
+
+        }
+
+        return resultado.comentarios;
+
+    },
+
+
+    async criarComentario(dados) {
+
+        const resposta = await fetch(
+            `${API_URL}/comentarios`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(dados)
+            }
+        );
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                resultado.erro ||
+                "Não foi possível publicar o comentário."
+            );
+
+        }
+
+        return resultado.comentario;
+
+    },
+
+
+    async excluirComentario(id) {
+
+        const resposta = await fetch(
+            `${API_URL}/comentarios/${id}`,
+            {
+                method: "DELETE",
+
+                headers: obterHeaders()
+            }
+        );
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                resultado.erro ||
+                "Não foi possível excluir o comentário."
+            );
+
+        }
+
+        return resultado.comentario;
+
+    },
+
+/* ==========================
+   NOTÍCIAS
+========================== */
+
+async listarNoticias() {
+
+    const resposta = await fetch(
+        `${API_URL}/noticias`
+    );
+
+    const resultado = await resposta.json();
+
+    if (!resposta.ok) {
+
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível carregar as notícias."
+        );
+
     }
+
+    return resultado.noticias;
+
+},
+
+
+async criarNoticia(texto) {
+
+    const resposta = await fetch(
+        `${API_URL}/noticias`,
+        {
+            method: "POST",
+
+            headers: obterHeaders(),
+
+            body: JSON.stringify({
+                texto
+            })
+        }
+    );
+
+    const resultado = await resposta.json();
+
+    if (!resposta.ok) {
+
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível publicar a notícia."
+        );
+
+    }
+
+    return resultado.noticia;
+
+},
+
+
+async excluirNoticia(id) {
+
+    const resposta = await fetch(
+        `${API_URL}/noticias/${id}`,
+        {
+            method: "DELETE",
+
+            headers: obterHeaders()
+        }
+    );
+
+    const resultado = await resposta.json();
+
+    if (!resposta.ok) {
+
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível excluir a notícia."
+        );
+
+    }
+
+    return resultado.noticia;
+
+}
 
 };

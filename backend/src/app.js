@@ -11,6 +11,9 @@ const authRoutes = require(
 const comentarioRoutes = require(
     "./routes/comentarioRoutes"
 );
+const noticiaRoutes = require(
+    "./routes/noticiaRoutes"
+);
 
 const app = express();
 
@@ -36,6 +39,10 @@ app.use(
 app.use(
     "/api/comentarios",
     comentarioRoutes
+);
+app.use(
+    "/api/noticias",
+    noticiaRoutes
 );
 
 module.exports = app;

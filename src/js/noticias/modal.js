@@ -21,36 +21,35 @@ const quantidadeNoticia =
     document.getElementById("quantidadeNoticia");
 
 
-if(
+if (
     abrirNoticia &&
     fecharNoticia &&
     modalNoticia &&
     formNoticia &&
     textoNoticia
-){
+) {
 
-    function encerrarJanelaNoticia(){
+    function encerrarJanelaNoticia() {
 
         modalNoticia.classList.remove("ativo");
 
         formNoticia.reset();
 
-        if(quantidadeNoticia){
-
+        if (quantidadeNoticia) {
             quantidadeNoticia.textContent = "0";
-
         }
-
     }
 
 
-    abrirNoticia.addEventListener("click", () => {
+    abrirNoticia.addEventListener(
+        "click",
+        () => {
 
-        modalNoticia.classList.add("ativo");
+            modalNoticia.classList.add("ativo");
 
-        textoNoticia.focus();
-
-    });
+            textoNoticia.focus();
+        }
+    );
 
 
     fecharNoticia.addEventListener(
@@ -63,86 +62,92 @@ if(
         "click",
         (evento) => {
 
-            if(evento.target === modalNoticia){
-
+            if (evento.target === modalNoticia) {
                 encerrarJanelaNoticia();
-
             }
-
         }
     );
 
 
-    textoNoticia.addEventListener("input", () => {
+    textoNoticia.addEventListener(
+        "input",
+        () => {
 
-        if(quantidadeNoticia){
-
-            quantidadeNoticia.textContent =
-                textoNoticia.value.length;
-
+            if (quantidadeNoticia) {
+                quantidadeNoticia.textContent =
+                    textoNoticia.value.length;
+            }
         }
-
-    });
+    );
 
 
     formNoticia.addEventListener(
         "submit",
-        (evento) => {
+        async (evento) => {
 
             evento.preventDefault();
 
             const novaNoticia =
                 textoNoticia.value.trim();
 
-
-            if(novaNoticia === ""){
+            if (novaNoticia === "") {
 
                 alert(
                     "Digite uma notícia antes de publicar."
                 );
 
-                return;
+                textoNoticia.focus();
 
+                return;
             }
 
-
-            if(novaNoticia.length > 120){
+            if (novaNoticia.length > 200) {
 
                 alert(
-                    "A notícia deve ter no máximo 120 caracteres."
+                    "A notícia deve ter no máximo 200 caracteres."
                 );
 
+                textoNoticia.focus();
+
                 return;
-
             }
 
+            const botaoPublicar =
+                formNoticia.querySelector(
+                    'button[type="submit"]'
+                );
 
-            const noticias =
-                window.NoticiasRender
-                    .carregarNoticias();
+            try {
 
+                botaoPublicar.disabled = true;
 
-            if(noticias.length >= 2){
+                botaoPublicar.textContent =
+                    "Publicando...";
 
-                noticias.shift();
+                await window.NoticiasStorage.salvar(
+                    novaNoticia
+                );
 
+                await window.NoticiasRender.mostrar();
+
+                encerrarJanelaNoticia();
+
+            } catch (erro) {
+
+                console.error(erro);
+
+                alert(
+                    erro.message ||
+                    "Não foi possível publicar a notícia."
+                );
+
+            } finally {
+
+                botaoPublicar.disabled = false;
+
+                botaoPublicar.textContent =
+                    "Publicar";
             }
-
-
-            noticias.push(novaNoticia);
-
-
-            window.NoticiasStorage.salvar(
-                noticias
-            );
-
-
-            window.NoticiasRender.mostrar();
-
-
-            encerrarJanelaNoticia();
-
         }
     );
-
 }

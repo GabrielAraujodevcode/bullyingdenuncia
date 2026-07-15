@@ -24,37 +24,36 @@ const quantidadeCaracteres =
     document.getElementById("quantidadeCaracteres");
 
 
-if(
+if (
     abrirComentario &&
     fecharComentario &&
     modalComentario &&
     formComentario &&
     nomeUsuario &&
     textoComentario
-){
+) {
 
-    function encerrarJanelaComentario(){
+    function encerrarJanelaComentario() {
 
         modalComentario.classList.remove("ativo");
 
         formComentario.reset();
 
-        if(quantidadeCaracteres){
-
+        if (quantidadeCaracteres) {
             quantidadeCaracteres.textContent = "0";
-
         }
-
     }
 
 
-    abrirComentario.addEventListener("click", () => {
+    abrirComentario.addEventListener(
+        "click",
+        () => {
 
-        modalComentario.classList.add("ativo");
+            modalComentario.classList.add("ativo");
 
-        nomeUsuario.focus();
-
-    });
+            nomeUsuario.focus();
+        }
+    );
 
 
     fecharComentario.addEventListener(
@@ -67,31 +66,28 @@ if(
         "click",
         (evento) => {
 
-            if(evento.target === modalComentario){
-
+            if (evento.target === modalComentario) {
                 encerrarJanelaComentario();
-
             }
-
         }
     );
 
 
-    textoComentario.addEventListener("input", () => {
+    textoComentario.addEventListener(
+        "input",
+        () => {
 
-        if(quantidadeCaracteres){
-
-            quantidadeCaracteres.textContent =
-                textoComentario.value.length;
-
+            if (quantidadeCaracteres) {
+                quantidadeCaracteres.textContent =
+                    textoComentario.value.length;
+            }
         }
-
-    });
+    );
 
 
     formComentario.addEventListener(
         "submit",
-        (evento) => {
+        async (evento) => {
 
             evento.preventDefault();
 
@@ -101,67 +97,72 @@ if(
             const comentarioDigitado =
                 textoComentario.value.trim();
 
-
-            if(
+            if (
                 usuarioDigitado === "" ||
                 comentarioDigitado === ""
-            ){
-
+            ) {
                 alert(
                     "Preencha o nome de usuário e o comentário."
                 );
 
                 return;
-
             }
 
-
-            if(comentarioDigitado.length > 60){
-
+            if (usuarioDigitado.length > 30) {
                 alert(
-                    "O comentário deve ter no máximo 60 caracteres."
+                    "O nome de usuário deve ter no máximo 30 caracteres."
                 );
 
+                nomeUsuario.focus();
+
                 return;
-
             }
 
+            if (comentarioDigitado.length > 150) {
+                alert(
+                    "O comentário deve ter no máximo 150 caracteres."
+                );
 
-            const comentarios =
-                window.ComentariosRender
-                    .carregarComentarios();
+                textoComentario.focus();
 
-
-            const novoComentario = {
-
-                usuario: usuarioDigitado,
-
-                comentario: comentarioDigitado
-
-            };
-
-
-            if(comentarios.length >= 4){
-
-                comentarios.shift();
-
+                return;
             }
 
+            const botaoEnviar =
+                formComentario.querySelector(
+                    'button[type="submit"]'
+                );
 
-            comentarios.push(novoComentario);
+            try {
 
+                botaoEnviar.disabled = true;
+                botaoEnviar.textContent =
+                    "Publicando...";
 
-            window.ComentariosStorage.salvar(
-                comentarios
-            );
+                await window.ComentariosStorage.salvar(
+                    usuarioDigitado,
+                    comentarioDigitado
+                );
 
+                await window.ComentariosRender.mostrar();
 
-            window.ComentariosRender.mostrar();
+                encerrarJanelaComentario();
 
+            } catch (erro) {
 
-            encerrarJanelaComentario();
+                console.error(erro);
 
+                alert(
+                    erro.message ||
+                    "Não foi possível publicar o comentário."
+                );
+
+            } finally {
+
+                botaoEnviar.disabled = false;
+                botaoEnviar.textContent =
+                    "Comentar";
+            }
         }
     );
-
 }

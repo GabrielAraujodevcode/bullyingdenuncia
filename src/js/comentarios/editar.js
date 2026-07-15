@@ -15,145 +15,182 @@ const listaEditarComentarios =
     document.getElementById("listaEditarComentarios");
 
 
-if(
+if (
     botaoEditar &&
     modalEditar &&
     fecharEditar &&
     listaEditarComentarios
-){
+) {
 
-    function montarListaEdicao(){
+    async function montarListaEdicao() {
 
-        const comentarios =
-            window.ComentariosRender
-                .carregarComentarios();
+        listaEditarComentarios.innerHTML = `
+            <p class="semComentarios">
+                Carregando comentários...
+            </p>
+        `;
 
-        listaEditarComentarios.innerHTML = "";
+        try {
+
+            const comentarios =
+                await window.ComentariosStorage
+                    .carregar();
+
+            listaEditarComentarios.innerHTML = "";
+
+            if (comentarios.length === 0) {
+
+                listaEditarComentarios.innerHTML = `
+                    <p class="semComentarios">
+                        Nenhum comentário publicado.
+                    </p>
+                `;
+
+                return;
+            }
+
+            comentarios.forEach((comentario) => {
+
+                const itemComentario =
+                    document.createElement("div");
+
+                itemComentario.classList.add(
+                    "itemEditarComentario"
+                );
 
 
-        if(comentarios.length === 0){
+                const conteudoComentario =
+                    document.createElement("div");
+
+                conteudoComentario.classList.add(
+                    "conteudoEditarComentario"
+                );
+
+
+                const tituloUsuario =
+                    document.createElement("h3");
+
+                tituloUsuario.textContent =
+                    `@${comentario.usuario}:`;
+
+
+                const textoDoComentario =
+                    document.createElement("p");
+
+                textoDoComentario.textContent =
+                    comentario.texto;
+
+
+                const botaoApagar =
+                    document.createElement("button");
+
+                botaoApagar.type = "button";
+
+                botaoApagar.classList.add(
+                    "botaoApagarComentario"
+                );
+
+                botaoApagar.textContent =
+                    "Apagar";
+
+
+                botaoApagar.addEventListener(
+                    "click",
+                    async () => {
+
+                        await apagarComentario(
+                            comentario.id,
+                            botaoApagar
+                        );
+                    }
+                );
+
+
+                conteudoComentario.append(
+                    tituloUsuario,
+                    textoDoComentario
+                );
+
+
+                itemComentario.append(
+                    conteudoComentario,
+                    botaoApagar
+                );
+
+
+                listaEditarComentarios.appendChild(
+                    itemComentario
+                );
+            });
+
+        } catch (erro) {
+
+            console.error(erro);
 
             listaEditarComentarios.innerHTML = `
                 <p class="semComentarios">
-                    Nenhum comentário publicado.
+                    Não foi possível carregar os comentários.
                 </p>
             `;
+        }
+    }
 
+
+    async function apagarComentario(
+        id,
+        botaoApagar
+    ) {
+
+        const confirmou =
+            confirm(
+                "Deseja realmente apagar este comentário?"
+            );
+
+        if (!confirmou) {
             return;
-
         }
 
+        try {
 
-        comentarios.forEach((comentario, indice) => {
+            botaoApagar.disabled = true;
+            botaoApagar.textContent =
+                "Apagando...";
 
-            const itemComentario =
-                document.createElement("div");
+            await window.ComentariosStorage
+                .apagar(id);
 
-            itemComentario.classList.add(
-                "itemEditarComentario"
+            await window.ComentariosRender
+                .mostrar();
+
+            await montarListaEdicao();
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            alert(
+                erro.message ||
+                "Não foi possível apagar o comentário."
             );
 
-
-            const conteudoComentario =
-                document.createElement("div");
-
-            conteudoComentario.classList.add(
-                "conteudoEditarComentario"
-            );
-
-
-            const tituloUsuario =
-                document.createElement("h3");
-
-            tituloUsuario.textContent =
-                `@${comentario.usuario}:`;
-
-
-            const textoDoComentario =
-                document.createElement("p");
-
-            textoDoComentario.textContent =
-                comentario.comentario;
-
-
-            const botaoApagar =
-                document.createElement("button");
-
-            botaoApagar.type = "button";
-
-            botaoApagar.classList.add(
-                "botaoApagarComentario"
-            );
-
-            botaoApagar.textContent = "Apagar";
-
-
-            botaoApagar.addEventListener(
-                "click",
-                () => {
-
-                    apagarComentario(indice);
-
-                }
-            );
-
-
-            conteudoComentario.append(
-                tituloUsuario,
-                textoDoComentario
-            );
-
-
-            itemComentario.append(
-                conteudoComentario,
-                botaoApagar
-            );
-
-
-            listaEditarComentarios.appendChild(
-                itemComentario
-            );
-
-        });
-
+            botaoApagar.disabled = false;
+            botaoApagar.textContent =
+                "Apagar";
+        }
     }
 
 
-    function apagarComentario(indice){
-
-        const comentarios =
-            window.ComentariosRender
-                .carregarComentarios();
-
-        comentarios.splice(indice, 1);
-
-
-        window.ComentariosStorage.salvar(
-            comentarios
-        );
-
-
-        window.ComentariosRender.mostrar();
-
-
-        montarListaEdicao();
-
-    }
-
-
-    function abrirJanelaEditar(){
-
-        montarListaEdicao();
+    async function abrirJanelaEditar() {
 
         modalEditar.classList.add("ativo");
 
+        await montarListaEdicao();
     }
 
 
-    function fecharJanelaEditar(){
+    function fecharJanelaEditar() {
 
         modalEditar.classList.remove("ativo");
-
     }
 
 
@@ -173,13 +210,9 @@ if(
         "click",
         (evento) => {
 
-            if(evento.target === modalEditar){
-
+            if (evento.target === modalEditar) {
                 fecharJanelaEditar();
-
             }
-
         }
     );
-
 }

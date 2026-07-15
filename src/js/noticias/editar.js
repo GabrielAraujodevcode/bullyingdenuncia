@@ -15,131 +15,171 @@ const listaEditarNoticias =
     document.getElementById("listaEditarNoticias");
 
 
-if(
+if (
     editarNoticias &&
     modalEditarNoticias &&
     fecharEditarNoticias &&
     listaEditarNoticias
-){
+) {
 
-    function montarListaNoticias(){
+    async function montarListaNoticias() {
 
-        const noticias =
-            window.NoticiasRender
-                .carregarNoticias();
+        listaEditarNoticias.innerHTML = `
+            <p class="semNoticias">
+                Carregando notícias...
+            </p>
+        `;
 
-        listaEditarNoticias.innerHTML = "";
+        try {
+
+            const noticias =
+                await window.NoticiasStorage
+                    .carregar();
+
+            listaEditarNoticias.innerHTML = "";
+
+            if (noticias.length === 0) {
+
+                listaEditarNoticias.innerHTML = `
+                    <p class="semNoticias">
+                        Nenhuma notícia publicada.
+                    </p>
+                `;
+
+                return;
+            }
+
+            noticias.forEach((noticia) => {
+
+                const item =
+                    document.createElement("div");
+
+                item.classList.add(
+                    "itemEditarNoticia"
+                );
 
 
-        if(noticias.length === 0){
+                const texto =
+                    document.createElement("p");
+
+                texto.classList.add(
+                    "textoEditarNoticia"
+                );
+
+                texto.textContent =
+                    noticia.texto;
+
+
+                const botaoApagar =
+                    document.createElement("button");
+
+                botaoApagar.type = "button";
+
+                botaoApagar.classList.add(
+                    "botaoApagarNoticia"
+                );
+
+                botaoApagar.textContent =
+                    "Apagar";
+
+
+                botaoApagar.addEventListener(
+                    "click",
+                    async () => {
+
+                        await apagarNoticia(
+                            noticia.id,
+                            botaoApagar
+                        );
+                    }
+                );
+
+
+                item.append(
+                    texto,
+                    botaoApagar
+                );
+
+
+                listaEditarNoticias.appendChild(
+                    item
+                );
+            });
+
+        } catch (erro) {
+
+            console.error(erro);
 
             listaEditarNoticias.innerHTML = `
                 <p class="semNoticias">
-                    Nenhuma notícia publicada.
+                    Não foi possível carregar as notícias.
                 </p>
             `;
+        }
+    }
 
+
+    async function apagarNoticia(
+        id,
+        botaoApagar
+    ) {
+
+        const confirmou =
+            confirm(
+                "Deseja realmente apagar esta notícia?"
+            );
+
+        if (!confirmou) {
             return;
-
         }
 
+        try {
 
-        noticias.forEach((noticia, indice) => {
+            botaoApagar.disabled = true;
 
-            const item =
-                document.createElement("div");
+            botaoApagar.textContent =
+                "Apagando...";
 
-            item.classList.add(
-                "itemEditarNoticia"
+            await window.NoticiasStorage
+                .apagar(id);
+
+            await window.NoticiasRender
+                .mostrar();
+
+            await montarListaNoticias();
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            alert(
+                erro.message ||
+                "Não foi possível apagar a notícia."
             );
 
+            botaoApagar.disabled = false;
 
-            const texto =
-                document.createElement("p");
-
-            texto.classList.add(
-                "textoEditarNoticia"
-            );
-
-            texto.textContent = noticia;
-
-
-            const botaoApagar =
-                document.createElement("button");
-
-            botaoApagar.type = "button";
-
-            botaoApagar.classList.add(
-                "botaoApagarNoticia"
-            );
-
-            botaoApagar.textContent = "Apagar";
-
-
-            botaoApagar.addEventListener(
-                "click",
-                () => {
-
-                    apagarNoticia(indice);
-
-                }
-            );
-
-
-            item.append(
-                texto,
-                botaoApagar
-            );
-
-
-            listaEditarNoticias.appendChild(
-                item
-            );
-
-        });
-
+            botaoApagar.textContent =
+                "Apagar";
+        }
     }
 
 
-    function apagarNoticia(indice){
-
-        const noticias =
-            window.NoticiasRender
-                .carregarNoticias();
-
-        noticias.splice(indice, 1);
-
-
-        window.NoticiasStorage.salvar(
-            noticias
-        );
-
-
-        window.NoticiasRender.mostrar();
-
-
-        montarListaNoticias();
-
-    }
-
-
-    function abrirJanelaEditarNoticias(){
-
-        montarListaNoticias();
+    async function abrirJanelaEditarNoticias() {
 
         modalEditarNoticias.classList.add(
             "ativo"
         );
 
+        await montarListaNoticias();
     }
 
 
-    function fecharJanelaEditarNoticias(){
+    function fecharJanelaEditarNoticias() {
 
         modalEditarNoticias.classList.remove(
             "ativo"
         );
-
     }
 
 
@@ -159,13 +199,13 @@ if(
         "click",
         (evento) => {
 
-            if(evento.target === modalEditarNoticias){
+            if (
+                evento.target ===
+                modalEditarNoticias
+            ) {
 
                 fecharJanelaEditarNoticias();
-
             }
-
         }
     );
-
 }

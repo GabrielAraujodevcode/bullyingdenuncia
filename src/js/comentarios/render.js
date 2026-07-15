@@ -8,105 +8,102 @@ window.ComentariosRender = {
         ".comentario1, .comentario2, .comentario3, .comentario4"
     ),
 
-
-    obterComentariosIniciais(){
-
-        const comentariosIniciais = [];
-
-        this.caixas.forEach((caixa) => {
-
-            const tituloUsuario = caixa.querySelector("h3");
-            const textoComentario = caixa.querySelector("p");
-
-            if(!tituloUsuario || !textoComentario){
-
-                return;
-
-            }
-
-            const usuario = tituloUsuario.textContent
-                .replace("@", "")
-                .replace(":", "")
-                .trim();
-
-            const comentario = textoComentario.textContent.trim();
-
-            comentariosIniciais.push({
-
-                usuario,
-                comentario
-
-            });
-
-        });
-
-        return comentariosIniciais;
-
-    },
+    comentarios: [],
 
 
-    carregarComentarios(){
-
-        let comentarios =
-            window.ComentariosStorage.carregar();
-
-
-        if(comentarios === null){
-
-            comentarios = this.obterComentariosIniciais();
-
-            window.ComentariosStorage.salvar(
-                comentarios
-            );
-
-        }
-
-        return comentarios;
-
-    },
-
-
-    mostrar(){
+    async carregarComentarios() {
 
         const comentarios =
-            this.carregarComentarios();
+            await window.ComentariosStorage.carregar();
+
+        /*
+        A API devolve os comentários do mais recente
+        para o mais antigo.
+
+        Como existem apenas quatro espaços na tela,
+        mostramos somente os quatro primeiros.
+        */
+
+        this.comentarios =
+            comentarios.slice(0, 4);
+
+        return this.comentarios;
+    },
 
 
-        this.caixas.forEach((caixa, indice) => {
+    async mostrar() {
 
-            const tituloUsuario = caixa.querySelector("h3");
+        try {
 
-            const textoComentario = caixa.querySelector("p");
+            const comentarios =
+                await this.carregarComentarios();
 
-            if(!tituloUsuario || !textoComentario){
+            this.caixas.forEach(
+                (caixa, indice) => {
 
-                return;
+                    const tituloUsuario =
+                        caixa.querySelector("h3");
 
-            }
+                    const textoComentario =
+                        caixa.querySelector("p");
 
-            const comentarioAtual = comentarios[indice];
+                    if (
+                        !tituloUsuario ||
+                        !textoComentario
+                    ) {
+                        return;
+                    }
 
+                    const comentarioAtual =
+                        comentarios[indice];
 
-            if(comentarioAtual){
+                    if (comentarioAtual) {
 
-                tituloUsuario.textContent =
-                    `@${comentarioAtual.usuario}:`;
+                        tituloUsuario.textContent =
+                            `@${comentarioAtual.usuario}:`;
 
-                textoComentario.textContent =
-                    comentarioAtual.comentario;
+                        textoComentario.textContent =
+                            comentarioAtual.texto;
 
-            }else{
+                    } else {
 
-                tituloUsuario.textContent =
-                    "@usuario:";
+                        tituloUsuario.textContent =
+                            "@usuario:";
 
-                textoComentario.textContent =
-                    "Nenhum comentário ainda.";
+                        textoComentario.textContent =
+                            "Nenhum comentário ainda.";
+                    }
+                }
+            );
 
-            }
+        } catch (erro) {
 
-        });
+            console.error(
+                "Erro ao exibir os comentários:",
+                erro
+            );
 
+            this.caixas.forEach((caixa) => {
+
+                const tituloUsuario =
+                    caixa.querySelector("h3");
+
+                const textoComentario =
+                    caixa.querySelector("p");
+
+                if (
+                    tituloUsuario &&
+                    textoComentario
+                ) {
+
+                    tituloUsuario.textContent =
+                        "@usuario:";
+
+                    textoComentario.textContent =
+                        "Não foi possível carregar os comentários.";
+                }
+            });
+        }
     }
 
 };
@@ -117,21 +114,3 @@ INICIAR COMENTÁRIOS
 ========================== */
 
 window.ComentariosRender.mostrar();
-
-
-/* ==========================
-ATUALIZAR ENTRE ABAS
-========================== */
-
-window.addEventListener("storage", (evento) => {
-
-    if(
-        evento.key ===
-        window.ComentariosStorage.chave
-    ){
-
-        window.ComentariosRender.mostrar();
-
-    }
-
-});

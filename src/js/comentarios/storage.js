@@ -1,48 +1,28 @@
-/* ==========================
-ARMAZENAMENTO DOS COMENTÁRIOS
-========================== */
-
 window.ComentariosStorage = {
 
-    chave: "comentariosEstudantes",
+    async carregar(){
 
-
-    carregar(){
-
-        const comentariosSalvos = localStorage.getItem(
-            this.chave
-        );
-
-        if(!comentariosSalvos){
-
-            return null;
-
-        }
-
-        try{
-
-            return JSON.parse(comentariosSalvos);
-
-        }catch(erro){
-
-            console.error(
-                "Não foi possível carregar os comentários.",
-                erro
-            );
-
-            return [];
-
-        }
+        return await window.Api.listarComentarios();
 
     },
 
 
-    salvar(comentarios){
+    async salvar(usuario, comentario){
 
-        localStorage.setItem(
-            this.chave,
-            JSON.stringify(comentarios)
-        );
+        return await window.Api.criarComentario({
+
+            usuario,
+
+            texto: comentario
+
+        });
+
+    },
+
+
+    async apagar(id){
+
+        return await window.Api.excluirComentario(id);
 
     }
 

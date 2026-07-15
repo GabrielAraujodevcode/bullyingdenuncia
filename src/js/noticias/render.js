@@ -8,92 +8,73 @@ window.NoticiasRender = {
         ".noticia1, .noticia2"
     ),
 
-
-    obterNoticiasIniciais(){
-
-        const noticiasIniciais = [];
-
-        this.caixas.forEach((caixa) => {
-
-            const paragrafo = caixa.querySelector("p");
-
-            if(!paragrafo){
-
-                return;
-
-            }
-
-            const texto = paragrafo.textContent.trim();
+    noticias: [],
 
 
-            if(
-                texto !== "" &&
-                texto !== "Nenhuma notícia publicada."
-            ){
-
-                noticiasIniciais.push(texto);
-
-            }
-
-        });
-
-        return noticiasIniciais;
-
-    },
-
-
-    carregarNoticias(){
-
-        let noticias =
-            window.NoticiasStorage.carregar();
-
-
-        if(noticias === null){
-
-            noticias = this.obterNoticiasIniciais();
-
-            window.NoticiasStorage.salvar(
-                noticias
-            );
-
-        }
-
-        return noticias;
-
-    },
-
-
-    mostrar(){
+    async carregarNoticias() {
 
         const noticias =
-            this.carregarNoticias();
+            await window.NoticiasStorage.carregar();
+
+        this.noticias =
+            noticias.slice(0, 2);
+
+        return this.noticias;
+    },
 
 
-        this.caixas.forEach((caixa, indice) => {
+    async mostrar() {
 
-            const paragrafo = caixa.querySelector("p");
+        try {
 
-            if(!paragrafo){
+            const noticias =
+                await this.carregarNoticias();
 
-                return;
+            this.caixas.forEach(
+                (caixa, indice) => {
 
-            }
+                    const paragrafo =
+                        caixa.querySelector("p");
 
+                    if (!paragrafo) {
+                        return;
+                    }
 
-            if(noticias[indice]){
+                    const noticiaAtual =
+                        noticias[indice];
 
-                paragrafo.textContent =
-                    noticias[indice];
+                    if (noticiaAtual) {
 
-            }else{
+                        paragrafo.textContent =
+                            noticiaAtual.texto;
 
-                paragrafo.textContent =
-                    "Nenhuma notícia publicada.";
+                    } else {
 
-            }
+                        paragrafo.textContent =
+                            "Nenhuma notícia publicada.";
+                    }
+                }
+            );
 
-        });
+        } catch (erro) {
 
+            console.error(
+                "Erro ao exibir as notícias:",
+                erro
+            );
+
+            this.caixas.forEach((caixa) => {
+
+                const paragrafo =
+                    caixa.querySelector("p");
+
+                if (paragrafo) {
+
+                    paragrafo.textContent =
+                        "Não foi possível carregar as notícias.";
+                }
+            });
+        }
     }
 
 };
@@ -104,21 +85,3 @@ INICIAR NOTÍCIAS
 ========================== */
 
 window.NoticiasRender.mostrar();
-
-
-/* ==========================
-ATUALIZAR ENTRE ABAS
-========================== */
-
-window.addEventListener("storage", (evento) => {
-
-    if(
-        evento.key ===
-        window.NoticiasStorage.chave
-    ){
-
-        window.NoticiasRender.mostrar();
-
-    }
-
-});

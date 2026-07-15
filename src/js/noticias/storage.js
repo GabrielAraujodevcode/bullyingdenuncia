@@ -4,44 +4,26 @@ ARMAZENAMENTO DAS NOTÍCIAS
 
 window.NoticiasStorage = {
 
-    chave: "noticiasSecretaria",
+    async carregar(){
 
-
-    carregar(){
-
-        const noticiasSalvas = localStorage.getItem(
-            this.chave
-        );
-
-        if(!noticiasSalvas){
-
-            return null;
-
-        }
-
-        try{
-
-            return JSON.parse(noticiasSalvas);
-
-        }catch(erro){
-
-            console.error(
-                "Não foi possível carregar as notícias.",
-                erro
-            );
-
-            return [];
-
-        }
+        return await window.Api.listarNoticias();
 
     },
 
 
-    salvar(noticias){
+    async salvar(texto){
 
-        localStorage.setItem(
-            this.chave,
-            JSON.stringify(noticias)
+        return await window.Api.criarNoticia(
+            texto
+        );
+
+    },
+
+
+    async apagar(id){
+
+        return await window.Api.excluirNoticia(
+            id
         );
 
     }
