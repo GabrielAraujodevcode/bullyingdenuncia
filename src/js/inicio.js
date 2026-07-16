@@ -1,10 +1,21 @@
-const API_URL = "https://bullyingdenuncia-api.onrender.com/api";
+const API_URL =
+    "https://bullyingdenuncia-api.onrender.com/api";
 
-const abrir = document.getElementById("abrirFormulario");
-const fechar = document.getElementById("fecharFormulario");
-const modal = document.getElementById("modal");
+/* ==========================
+ELEMENTOS DA PÁGINA
+========================== */
 
-const formulario = document.getElementById("formDenuncia");
+const abrirFormulario =
+    document.getElementById("abrirFormulario");
+
+const fecharFormularioBotao =
+    document.getElementById("fecharFormulario");
+
+const modalFormulario =
+    document.getElementById("modal");
+
+const formulario =
+    document.getElementById("formDenuncia");
 
 const modalProtocolo =
     document.getElementById("modalProtocolo");
@@ -18,34 +29,91 @@ const confirmarProtocolo =
 const codigoProtocolo =
     document.getElementById("codigoProtocolo");
 
+const campoUsuarioAnonimo =
+    document.getElementById("usuarioAnonimo");
+
+const campoLocalOcorrencia =
+    document.getElementById("localOcorrencia");
+
+const campoAgressorDescricao =
+    document.getElementById("agressorDescricao");
+
+const campoTipoBullying =
+    document.getElementById("tipoBullying");
+
+const campoRelato =
+    document.getElementById("relato");
+
 const botaoEnviar =
-    formulario.querySelector(".btnEnviar");
+    formulario?.querySelector(".btnEnviar");
 
 
 /* ==========================
-ABRIR FORMULÁRIO
+VALIDAR ELEMENTOS
 ========================== */
 
-abrir.addEventListener("click", () => {
-    modal.classList.add("ativo");
-});
+const elementosObrigatorios = {
+    abrirFormulario,
+    fecharFormularioBotao,
+    modalFormulario,
+    formulario,
+    modalProtocolo,
+    fecharProtocolo,
+    confirmarProtocolo,
+    codigoProtocolo,
+    campoUsuarioAnonimo,
+    campoLocalOcorrencia,
+    campoAgressorDescricao,
+    campoTipoBullying,
+    campoRelato,
+    botaoEnviar
+};
 
+const elementosAusentes =
+    Object.entries(elementosObrigatorios)
+        .filter(([, elemento]) => !elemento)
+        .map(([nome]) => nome);
 
-/* ==========================
-FECHAR FORMULÁRIO
-========================== */
+if (elementosAusentes.length > 0) {
+    console.error(
+        "Elementos não encontrados no HTML:",
+        elementosAusentes
+    );
 
-function fecharFormulario() {
-    modal.classList.remove("ativo");
+    throw new Error(
+        "O formulário não foi carregado corretamente."
+    );
 }
 
-fechar.addEventListener("click", fecharFormulario);
 
-modal.addEventListener("click", (evento) => {
-    if (evento.target === modal) {
-        fecharFormulario();
+/* ==========================
+ABRIR E FECHAR FORMULÁRIO
+========================== */
+
+abrirFormulario.addEventListener(
+    "click",
+    () => {
+        modalFormulario.classList.add("ativo");
     }
-});
+);
+
+function fecharJanelaFormulario() {
+    modalFormulario.classList.remove("ativo");
+}
+
+fecharFormularioBotao.addEventListener(
+    "click",
+    fecharJanelaFormulario
+);
+
+modalFormulario.addEventListener(
+    "click",
+    (evento) => {
+        if (evento.target === modalFormulario) {
+            fecharJanelaFormulario();
+        }
+    }
+);
 
 
 /* ==========================
@@ -55,33 +123,39 @@ CAPTURAR DADOS
 function obterDadosFormulario() {
     return {
         usuarioAnonimo:
-            document
-                .getElementById("usuarioAnonimo")
-                .value
-                .trim(),
+            campoUsuarioAnonimo.value.trim(),
 
         localOcorrencia:
-            document
-                .getElementById("localOcorrencia")
-                .value,
+            campoLocalOcorrencia.value,
 
         agressorDescricao:
-            document
-                .getElementById("agressorDescricao")
-                .value
-                .trim(),
+            campoAgressorDescricao.value.trim(),
 
         tipoBullying:
-            document
-                .getElementById("tipoBullying")
-                .value,
+            campoTipoBullying.value,
 
         relato:
-            document
-                .getElementById("relato")
-                .value
-                .trim()
+            campoRelato.value.trim()
     };
+}
+
+
+/* ==========================
+VALIDAR DADOS
+========================== */
+
+function validarDados(dados) {
+    if (
+        !dados.usuarioAnonimo ||
+        !dados.localOcorrencia ||
+        !dados.agressorDescricao ||
+        !dados.tipoBullying ||
+        !dados.relato
+    ) {
+        throw new Error(
+            "Preencha todos os campos da denúncia."
+        );
+    }
 }
 
 
@@ -103,7 +177,15 @@ async function enviarDenuncia(dados) {
         }
     );
 
-    const resultado = await resposta.json();
+    let resultado;
+
+    try {
+        resultado = await resposta.json();
+    } catch {
+        throw new Error(
+            "A API retornou uma resposta inválida."
+        );
+    }
 
     if (!resposta.ok) {
         throw new Error(
@@ -125,27 +207,47 @@ formulario.addEventListener(
     async (evento) => {
         evento.preventDefault();
 
-        const dados = obterDadosFormulario();
-
         try {
+            const dados =
+                obterDadosFormulario();
+
+            validarDados(dados);
+
             botaoEnviar.disabled = true;
-            botaoEnviar.textContent = "Enviando...";
+            botaoEnviar.textContent =
+                "Enviando...";
 
             const resultado =
                 await enviarDenuncia(dados);
 
+            if (!resultado.denuncia?.protocolo) {
+                throw new Error(
+                    "O protocolo não foi retornado pela API."
+                );
+            }
+
             codigoProtocolo.textContent =
                 resultado.denuncia.protocolo;
 
-            fecharFormulario();
+            fecharJanelaFormulario();
 
-            modalProtocolo.classList.add("ativo");
+            modalProtocolo.classList.add(
+                "ativo"
+            );
 
             formulario.reset();
+
         } catch (erro) {
-            alert(erro.message);
+            console.error(erro);
+
+            alert(
+                erro.message ||
+                "Não foi possível enviar a denúncia."
+            );
+
         } finally {
             botaoEnviar.disabled = false;
+
             botaoEnviar.textContent =
                 "Enviar Denúncia";
         }
