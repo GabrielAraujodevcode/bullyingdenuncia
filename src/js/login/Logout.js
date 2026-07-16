@@ -1,5 +1,5 @@
 const botaoSair =
-    document.getElementById("botaoSair");
+    document.getElementById("btnSair");
 
 if (botaoSair) {
 
@@ -7,17 +7,16 @@ if (botaoSair) {
         "click",
         () => {
 
-            if (
+            const confirmou =
                 confirm(
                     "Deseja realmente sair?"
-                )
-            ) {
+                );
 
-                window.Auth.sair();
-
+            if (!confirmou) {
+                return;
             }
 
+            window.Auth.sair();
         }
     );
-
 }

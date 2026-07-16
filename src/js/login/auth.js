@@ -3,21 +3,18 @@ const TOKEN_KEY = "tokenAdministrador";
 window.Auth = {
 
     obterToken() {
-
         return localStorage.getItem(
             TOKEN_KEY
         );
-
     },
 
     estaLogado() {
-
-        return !!this.obterToken();
-
+        return Boolean(
+            this.obterToken()
+        );
     },
 
     sair() {
-
         localStorage.removeItem(
             TOKEN_KEY
         );
@@ -26,9 +23,9 @@ window.Auth = {
             "administrador"
         );
 
-        window.location.href =
-    "login.html";
-
+        window.location.replace(
+            "index.html"
+        );
     }
 
 };
