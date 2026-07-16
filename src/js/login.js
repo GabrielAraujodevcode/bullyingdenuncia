@@ -100,7 +100,7 @@ formularioLogin.addEventListener(
             );
 
             window.location.href =
-                "Secretaria.html";
+    "secretaria.html";
 
         } catch (erro) {
 

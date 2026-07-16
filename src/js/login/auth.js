@@ -27,7 +27,7 @@ window.Auth = {
         );
 
         window.location.href =
-            "Login.html";
+    "login.html";
 
     }
 
