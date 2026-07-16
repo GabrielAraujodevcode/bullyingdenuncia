@@ -1,7 +1,19 @@
-const token = localStorage.getItem(
-    "tokenAdministrador"
-);
+/* ==========================
+PROTEGER PÁGINAS ADMINISTRATIVAS
+========================== */
 
-if (!token) {
-    window.location.replace("login.html");
-}
+(function protegerPagina() {
+
+    const tokenAdministrador =
+        localStorage.getItem(
+            "tokenAdministrador"
+        );
+
+    if (!tokenAdministrador) {
+
+        window.location.replace(
+            "login.html"
+        );
+    }
+
+})();

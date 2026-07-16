@@ -21,6 +21,35 @@ function obterHeaders() {
     return headers;
 
 }
+function verificarSessaoExpirada(
+    resposta,
+    resultado
+) {
+
+    if (resposta.status === 401) {
+
+        localStorage.removeItem(
+            "tokenAdministrador"
+        );
+
+        localStorage.removeItem(
+            "administrador"
+        );
+
+        alert(
+            resultado.erro ||
+            "Sua sessão expirou. Faça login novamente."
+        );
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return true;
+    }
+
+    return false;
+}
 
 window.Api = {
 
@@ -38,6 +67,15 @@ window.Api = {
         );
 
         const resultado = await resposta.json();
+
+        if (
+    verificarSessaoExpirada(
+        resposta,
+        resultado
+    )
+) {
+    return [];
+}
 
         if (!resposta.ok) {
 
