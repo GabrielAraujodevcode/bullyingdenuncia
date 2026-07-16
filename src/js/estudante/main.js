@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://bullyingdenuncia-api.onrender.com/api";
 
 async function buscarDenunciaPorProtocolo(
     protocolo
