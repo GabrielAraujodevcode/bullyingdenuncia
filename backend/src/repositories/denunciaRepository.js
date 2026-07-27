@@ -116,10 +116,26 @@ async function atualizar(id, dados) {
 
     return resultado.rows[0];
 }
+async function excluir(id) {
+
+    const comandoSql = `
+        DELETE FROM denuncias
+        WHERE id = $1
+        RETURNING *;
+    `;
+
+    const resultado = await pool.query(
+        comandoSql,
+        [id]
+    );
+
+    return resultado.rows[0];
+}
 
 module.exports = {
     criar,
     buscarPorProtocolo,
     listarTodas,
-    atualizar
+    atualizar,
+    excluir
 };

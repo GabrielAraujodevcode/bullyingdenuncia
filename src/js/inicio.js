@@ -1,9 +1,9 @@
 const API_URL =
     "https://bullyingdenuncia-api.onrender.com/api";
 
-/* ==========================
+/* 
 ELEMENTOS DA PÁGINA
-========================== */
+ */
 
 const abrirFormulario =
     document.getElementById("abrirFormulario");
@@ -48,9 +48,9 @@ const botaoEnviar =
     formulario?.querySelector(".btnEnviar");
 
 
-/* ==========================
+/*
 VALIDAR ELEMENTOS
-========================== */
+ */
 
 const elementosObrigatorios = {
     abrirFormulario,
@@ -86,9 +86,9 @@ if (elementosAusentes.length > 0) {
 }
 
 
-/* ==========================
+/* 
 ABRIR E FECHAR FORMULÁRIO
-========================== */
+ */
 
 abrirFormulario.addEventListener(
     "click",
@@ -116,9 +116,9 @@ modalFormulario.addEventListener(
 );
 
 
-/* ==========================
+/* 
 CAPTURAR DADOS
-========================== */
+*/
 
 function obterDadosFormulario() {
     return {
@@ -140,9 +140,9 @@ function obterDadosFormulario() {
 }
 
 
-/* ==========================
+/* 
 VALIDAR DADOS
-========================== */
+ */
 
 function validarDados(dados) {
     if (
@@ -198,9 +198,9 @@ async function enviarDenuncia(dados) {
 }
 
 
-/* ==========================
+/* 
 SUBMIT DO FORMULÁRIO
-========================== */
+*/
 
 formulario.addEventListener(
     "submit",
@@ -255,9 +255,9 @@ formulario.addEventListener(
 );
 
 
-/* ==========================
+/* 
 FECHAR PROTOCOLO
-========================== */
+*/
 
 function encerrarProtocolo() {
     modalProtocolo.classList.remove("ativo");
@@ -281,3 +281,33 @@ modalProtocolo.addEventListener(
         }
     }
 );
+/*
+   ANIMAÇÃO DOS CARDS AO ROLAR A PÁGINA*/
+
+const cardsInicio = document.querySelectorAll(
+    ".contanner1, .contanner2, .contanner3"
+);
+
+const observadorCards = new IntersectionObserver(
+    (entradas, observador) => {
+        entradas.forEach((entrada) => {
+            if (entrada.isIntersecting) {
+                entrada.target.classList.add("cardVisivel");
+
+                /*
+                 * Para de observar depois que o card aparece.
+                 * Assim a animação acontece somente uma vez.
+                 */
+                observador.unobserve(entrada.target);
+            }
+        });
+    },
+    {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px"
+    }
+);
+
+cardsInicio.forEach((card) => {
+    observadorCards.observe(card);
+});

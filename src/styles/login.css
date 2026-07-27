@@ -1,4 +1,6 @@
-*{
+/* Reset */
+
+* {
     margin: 0;
     padding: 0;
     border: none;
@@ -6,293 +8,672 @@
     text-decoration: none;
 }
 
-body{
+html {
+    scroll-behavior: smooth;
+}
+
+body {
     min-height: 100vh;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    color: #172033;
+
+    background:
+        radial-gradient(
+            circle at 12% 15%,
+            rgba(8, 102, 255, 0.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 85%,
+            rgba(96, 165, 250, 0.12),
+            transparent 32%
+        ),
+        #f0f2f5;
+
+    overflow-x: hidden;
+}
+
+
+/* Header */
+
+header {
+    position: relative;
+
+    min-height: 42vh;
+    padding: 5rem 1.5rem 4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 255, 255, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(93, 169, 255, 0.22),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #043b89 0%,
+            #0866ff 48%,
+            #003f9e 100%
+        );
+
+    box-shadow:
+        0 18px 45px rgba(8, 102, 255, 0.2);
+
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+
+    position: absolute;
+    top: -9rem;
+    right: -7rem;
+
+    width: 27rem;
+    height: 27rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+header::after {
+    content: "";
+
+    position: absolute;
+    bottom: -12rem;
+    left: -8rem;
+
+    width: 31rem;
+    height: 31rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+}
+.voltarInicio {
+    position: absolute;
+    z-index: 5;
+
+    top: 1.8rem;
+    left: 2rem;
+
+    padding: 0.75rem 1rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.8rem;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.voltarInicio svg {
+    width: 1.2rem;
+    height: 1.2rem;
+
+    transition: transform 0.25s ease;
+}
+
+.voltarInicio:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.17);
+
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.13);
+}
+
+.voltarInicio:hover svg {
+    transform: translateX(-3px);
+}
+
+
+.title {
+    position: relative;
+    z-index: 2;
+
+    width: min(900px, 100%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    animation: entradaTitulo 0.7s ease both;
+}
+
+.title h1 {
+    color: #ffffff;
+
+    font-size: clamp(3rem, 8vw, 5.8rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+
+    text-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Login */
+
+main {
+    width: 100%;
+}
+
+.areaLogin {
+    position: relative;
+
+    min-height: 58vh;
+    padding: 3.5rem 1rem 5rem;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.containerLogin {
+    position: relative;
+
+    width: min(100%, 470px);
+    margin-top: -6rem;
+    padding: 2.7rem;
+
+    border: 1px solid rgba(24, 119, 242, 0.1);
+    border-radius: 1.6rem;
 
     background:
         radial-gradient(
             circle at top right,
-            rgba(0, 86, 198, .25),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at bottom left,
-            rgba(80, 150, 255, .12),
-            transparent 40%
+            rgba(24, 119, 242, 0.1),
+            transparent 30%
         ),
         linear-gradient(
-            135deg,
-            #071338,
-            #0A194E,
-            #102761
+            145deg,
+            #ffffff 0%,
+            #f8fbff 55%,
+            #edf5ff 100%
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 24px 60px rgba(15, 23, 42, 0.15),
+        0 8px 22px rgba(24, 119, 242, 0.08);
+
+    overflow: hidden;
+
+    animation: aparecerLogin 0.55s ease both;
+}
+
+.containerLogin::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 0.35rem;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0866ff,
+            #65a9ff,
+            #0866ff
         );
 }
 
-header{
-    padding: 1.875rem;
 
-    background-color: #0056C6;
+/* Ícone */
+
+.iconeLogin {
+    width: 5.2rem;
+    height: 5.2rem;
+
+    margin: 0 auto 1.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(8, 102, 255, 0.12);
+    border-radius: 1.35rem;
+
+    color: #0866ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #edf5ff,
+            #dcecff
+        );
+
+    box-shadow:
+        0 12px 28px rgba(24, 119, 242, 0.16);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.title{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.iconeLogin:hover {
+    transform: translateY(-3px);
 
+    box-shadow:
+        0 16px 34px rgba(24, 119, 242, 0.22);
+}
+
+.iconeLogin svg {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    color: currentColor;
+}
+
+
+/* Títulos */
+
+.containerLogin h2 {
+    margin-bottom: 0.65rem;
+
+    color: #172033;
+
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 850;
+    letter-spacing: -0.035em;
     text-align: center;
 }
 
-.title h1{
-    color: white;
+.descricaoLogin {
+    max-width: 22rem;
+    margin: 0 auto 2rem;
 
-    font-size: clamp(2.2rem, 6vw, 4rem);
-}
+    color: #64748b;
 
-/* ==========================
-ÁREA DO LOGIN
-========================== */
-
-.areaLogin{
-    min-height: calc(100vh - 130px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 2rem 1rem;
-}
-
-.containerLogin{
-    width: 100%;
-    max-width: 450px;
-
-    padding: 2.5rem;
-
-    background-color: #E2E8F0E6;
-
-    border-radius: 1.5625rem;
-
-    box-shadow: 0 18px 40px rgba(0, 0, 0, .28);
-
-    animation: aparecerLogin .45s ease;
-}
-
-.iconeLogin{
-    width: 5rem;
-    height: 5rem;
-
-    margin: 0 auto 1.3rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: #0056C6;
-
-    border-radius: 50%;
-}
-
-.iconeLogin span{
-    font-size: 2.2rem;
-}
-
-.containerLogin h2{
-    color: #0A194E;
-
-    font-size: 2rem;
-
+    font-size: 0.98rem;
+    line-height: 1.65;
     text-align: center;
-
-    margin-bottom: .7rem;
 }
 
-.descricaoLogin{
-    color: #475569;
 
-    line-height: 1.5;
+/* Campos */
 
-    text-align: center;
-
-    margin-bottom: 2rem;
-}
-
-/* ==========================
-CAMPOS
-========================== */
-
-.campoLogin{
+.campoLogin {
     display: flex;
     flex-direction: column;
 
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.35rem;
 }
 
-.campoLogin label{
-    color: #0A194E;
+.campoLogin label {
+    margin-bottom: 0.55rem;
 
-    font-size: 1.05rem;
-    font-weight: bold;
+    color: #334155;
 
-    margin-bottom: .6rem;
+    font-size: 0.92rem;
+    font-weight: 750;
 }
 
-.campoLogin input{
+.campoLogin input {
     width: 100%;
+    min-height: 3.45rem;
 
-    padding: 1rem;
+    padding: 0.95rem 1rem;
 
-    background-color: white;
+    border: 1px solid #d8e0eb;
+    border-radius: 0.9rem;
 
-    color: #0A194E;
+    color: #172033;
+    background: #ffffff;
 
-    border: 1px solid #CBD5E1;
-    border-radius: .9rem;
+    box-shadow:
+        inset 0 1px 2px rgba(15, 23, 42, 0.03);
 
+    font-family: inherit;
     font-size: 1rem;
+    font-weight: 550;
 
     outline: none;
 
-    transition: .3s;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-.campoLogin input:focus{
-    border-color: #0056C6;
-
-    box-shadow: 0 0 0 3px rgba(0, 86, 198, .20);
+.campoLogin input::placeholder {
+    color: #98a2b3;
+    font-weight: 500;
 }
 
-.campoSenha{
+.campoLogin input:hover {
+    border-color: #b9c8dd;
+}
+
+.campoLogin input:focus {
+    border-color: #0866ff;
+
+    box-shadow:
+        0 0 0 4px rgba(8, 102, 255, 0.12);
+
+    background: #ffffff;
+}
+
+
+/* Senha */
+
+.campoSenha {
     position: relative;
 }
 
-.campoSenha input{
-    padding-right: 3.7rem;
+.campoSenha input {
+    padding-right: 3.9rem;
 }
 
-.mostrarSenha{
+.mostrarSenha {
     position: absolute;
-
     top: 50%;
-    right: .7rem;
+    right: 0.55rem;
 
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 2.65rem;
+    height: 2.65rem;
 
     padding: 0;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     transform: translateY(-50%);
 
-    background-color: transparent;
+    border-radius: 0.75rem;
 
-    border-radius: 50%;
+    color: #64748b;
+    background: transparent;
 
-    font-size: 1.2rem;
+    box-shadow: none;
 
     cursor: pointer;
+
+    transition:
+        color 0.25s ease,
+        background-color 0.25s ease,
+        transform 0.25s ease;
 }
 
-.mostrarSenha:hover{
-    background-color: #E2E8F0;
+.mostrarSenha:hover {
+    transform: translateY(-50%);
+
+    color: #0866ff;
+    background: #eef5ff;
 }
 
-/* ==========================
-MENSAGEM E BOTÃO
-========================== */
+.mostrarSenha svg {
+    width: 1.35rem;
+    height: 1.35rem;
+}
 
-.mensagemLogin{
+
+/* Mensagem */
+
+.mensagemLogin {
     min-height: 1.5rem;
-
     margin-bottom: 1rem;
 
-    font-size: .95rem;
-    font-weight: bold;
-
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.45;
     text-align: center;
 }
 
-.mensagemErro{
-    color: #B91C1C;
+.mensagemErro {
+    color: #b42318;
 }
 
-.mensagemSucesso{
-    color: #15803D;
+.mensagemSucesso {
+    color: #15803d;
 }
 
-.botaoEntrar{
+
+/* Botão */
+
+.botaoEntrar {
     width: 100%;
+    min-height: 3.5rem;
 
-    padding: 1rem;
+    padding: 0.95rem 1.4rem;
 
-    background-color: #0056C6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    color: white;
+    border-radius: 0.9rem;
 
-    border-radius: .9rem;
+    color: #ffffff;
 
-    font-size: 1.1rem;
-    font-weight: bold;
+    background:
+        linear-gradient(
+            135deg,
+            #0866ff,
+            #1877f2
+        );
+
+    box-shadow:
+        0 10px 22px rgba(8, 102, 255, 0.22);
+
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 800;
 
     cursor: pointer;
 
-    transition: .3s;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
-.botaoEntrar:hover{
-    transform: translateY(-3px);
+.botaoEntrar:hover {
+    transform: translateY(-2px);
 
-    background-color: #00449E;
+    filter: brightness(1.04);
 
-    box-shadow: 0 8px 18px rgba(0, 86, 198, .25);
+    box-shadow:
+        0 14px 28px rgba(8, 102, 255, 0.3);
 }
 
-.botaoEntrar:disabled{
-    opacity: .7;
+.botaoEntrar:active {
+    transform: translateY(0) scale(0.99);
+}
+
+.botaoEntrar:disabled {
+    opacity: 0.65;
 
     cursor: not-allowed;
-
     transform: none;
 }
 
-@keyframes aparecerLogin{
 
-    from{
+/* Animações */
+
+@keyframes entradaTitulo {
+    from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-14px);
     }
 
-    to{
+    to {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
-/* ==========================
-RESPONSIVIDADE
-========================== */
-
-@media(max-width: 500px){
-
-    header{
-        padding: 1.3rem;
+@keyframes aparecerLogin {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
     }
 
-    .title h1{
-        font-size: 2.2rem;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+/* Footer */
+
+footer {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.copyright {
+    width: 100%;
+    min-height: 5rem;
+    padding: 1.6rem 1.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+
+ 
+}
+
+.copyright svg {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    flex-shrink: 0;
+
+    color: #60a5fa;
+}
+
+.copyright p {
+    color: #aab6ca;
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.copyright strong {
+    color: #ffffff;
+    font-weight: 750;
+}
+
+@media (max-width: 480px) {
+
+    .copyright {
+        padding: 1.5rem 1rem;
+        align-items: flex-start;
     }
 
-    .containerLogin{
-        padding: 2rem 1.3rem;
+    .copyright svg {
+        margin-top: 0.15rem;
     }
 
-    .containerLogin h2{
-        font-size: 1.7rem;
+    .copyright p {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+
+    header {
+        min-height: 36vh;
+        padding: 4rem 1.2rem 3rem;
     }
 
+    .title h1 {
+        font-size: clamp(2.8rem, 14vw, 4.5rem);
+    }
+
+    .areaLogin {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .containerLogin {
+        margin-top: -4rem;
+    }
+}
+
+@media (max-width: 500px) {
+
+    header {
+        min-height: 32vh;
+        padding: 3.5rem 1rem 2.5rem;
+    }
+
+    .containerLogin {
+        width: 100%;
+        margin-top: -3rem;
+        padding: 2rem 1.25rem;
+
+        border-radius: 1.25rem;
+    }
+
+    .iconeLogin {
+        width: 4.5rem;
+        height: 4.5rem;
+
+        border-radius: 1.1rem;
+    }
+
+    .iconeLogin svg {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+
+    .containerLogin h2 {
+        font-size: 1.75rem;
+    }
+
+    .descricaoLogin {
+        font-size: 0.92rem;
+    }
 }

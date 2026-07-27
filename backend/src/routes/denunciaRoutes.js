@@ -37,5 +37,10 @@ router.patch(
     autenticarAdministrador,
     denunciaController.atualizarDenuncia
 );
+router.delete(
+    "/:id",
+    autenticarAdministrador,
+    denunciaController.excluirDenuncia
+);
 
 module.exports = router;

@@ -9,7 +9,10 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <link rel="stylesheet" href="styles/global.css">
+    <link
+        rel="stylesheet"
+        href="styles/global.css"
+    >
 
     <link
         rel="stylesheet"
@@ -21,15 +24,113 @@
 
 <body>
 
+    <!-- Header -->
+
     <header>
+
+        <a
+            href="estudante.html"
+            class="voltarPagina"
+        >
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+            >
+                <path
+                    fill="currentColor"
+                    d="M73.4 297.4C60.9 309.9 60.9 330.2 73.4 342.7L233.4 502.7C245.9 515.2 266.2 515.2 278.7 502.7C291.2 490.2 291.2 469.9 278.7 457.4L173.3 352H544C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288H173.3L278.7 182.6C291.2 170.1 291.2 149.8 278.7 137.3C266.2 124.8 245.9 124.8 233.4 137.3L73.4 297.4Z"
+                />
+            </svg>
+
+            <span>Voltar</span>
+
+        </a>
 
         <div class="title">
 
+            <span class="etiquetaHeader">
+                Acompanhamento
+            </span>
+
+            <div class="iconeHeader">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                >
+                    <path
+                        fill="currentColor"
+                        d="M320 64L512 144V288C512 411 435 518 320 576C205 518 128 411 128 288V144L320 64Z"
+                    />
+                </svg>
+
+            </div>
+
             <h1>Acompanhe sua denúncia</h1>
+
+            <p class="descricaoHeader">
+                Utilize seu protocolo para acompanhar o andamento da denúncia
+                e visualizar as mensagens enviadas pela equipe responsável.
+            </p>
+
+            <div class="recursosHeader">
+
+                <span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M96 96H544V544H96V96Z"
+                        />
+                    </svg>
+
+                    Protocolo seguro
+
+                </span>
+
+                <span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M320 64L512 144V288C512 411 435 518 320 576C205 518 128 411 128 288V144L320 64Z"
+                        />
+                    </svg>
+
+                    Acompanhamento online
+
+                </span>
+
+                <span>
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M96 96C78 96 64 110 64 128V448C64 466 78 480 96 480H192V560L298 480H544C562 480 576 466 576 448V128C576 110 562 96 544 96H96Z"
+                        />
+                    </svg>
+
+                    Comunicação com a secretaria
+
+                </span>
+
+            </div>
 
         </div>
 
     </header>
+
+    <!-- Main -->
 
     <main>
 
@@ -39,10 +140,24 @@
 
                 <h2>Detalhes da denúncia</h2>
 
-                <div class="grupoProtocolo">
+                <!-- Protocolo -->
+
+                <div class="grupoProtocolo cardInformacao">
 
                     <span class="tituloInformacao">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 640"
+                        >
+                            <path
+                                fill="currentColor"
+                                d="M128 64H448L544 160V544C544 562 530 576 512 576H128C110 576 96 562 96 544V96C96 78 110 64 128 64Z"
+                            />
+                        </svg>
+
                         Código da denúncia
+
                     </span>
 
                     <strong id="protocoloEstudante">
@@ -51,10 +166,24 @@
 
                 </div>
 
-                <div class="grupoStatus">
+                <!-- Status -->
+
+                <div class="grupoStatus cardInformacao">
 
                     <span class="tituloInformacao">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 640"
+                        >
+                            <path
+                                fill="currentColor"
+                                d="M530.8 171.5C540.2 180.9 540.2 196.1 530.8 205.4L274.8 461.4C265.4 470.8 250.2 470.8 240.9 461.4L109.2 329.7C99.8 320.3 99.8 305.1 109.2 295.8C118.6 286.4 133.8 286.4 143.1 295.8L257.8 410.5L496.9 171.5C506.2 162.2 521.4 162.2 530.8 171.5Z"
+                            />
+                        </svg>
+
                         Status atual
+
                     </span>
 
                     <div
@@ -65,6 +194,8 @@
                     </div>
 
                 </div>
+
+                <!-- Etapas -->
 
                 <div class="etapasStatus">
 
@@ -113,9 +244,25 @@
 
                 </div>
 
-                <div class="grupoMensagem">
+                <!-- Mensagem -->
 
-                    <h3>Mensagem da secretaria</h3>
+                <div class="grupoMensagem cardInformacao">
+
+                    <h3>
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 640"
+                        >
+                            <path
+                                fill="currentColor"
+                                d="M96 96C78 96 64 110 64 128V448C64 466 78 480 96 480H192V560L298 480H544C562 480 576 466 576 448V128C576 110 562 96 544 96H96Z"
+                            />
+                        </svg>
+
+                        Mensagem da secretaria
+
+                    </h3>
 
                     <div class="mensagemSecretaria">
 
@@ -134,11 +281,13 @@
 
     </main>
 
-   <script src="js/denuncias/shared/storage.js"></script>
+    <!-- Scripts -->
 
-<script src="js/estudante/elementos.js"></script>
-<script src="js/estudante/status.js"></script>
-<script src="js/estudante/main.js"></script>
+    <script src="js/denuncias/shared/storage.js"></script>
+
+    <script src="js/estudante/elementos.js"></script>
+    <script src="js/estudante/status.js"></script>
+    <script src="js/estudante/main.js"></script>
 
 </body>
 

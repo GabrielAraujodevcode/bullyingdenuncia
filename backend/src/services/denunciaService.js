@@ -211,9 +211,43 @@ async function atualizar(id, dados) {
 
     return denuncia;
 }
+async function excluir(id) {
+    const idNumerico = Number(id);
+
+    if (
+        !Number.isInteger(idNumerico) ||
+        idNumerico <= 0
+    ) {
+        const erro = new Error(
+            "O ID da denúncia é inválido."
+        );
+
+        erro.statusCode = 400;
+
+        throw erro;
+    }
+
+    const denuncia =
+        await denunciaRepository.excluir(
+            idNumerico
+        );
+
+    if (!denuncia) {
+        const erro = new Error(
+            "Denúncia não encontrada."
+        );
+
+        erro.statusCode = 404;
+
+        throw erro;
+    }
+
+    return denuncia;
+}
 module.exports = {
     criar,
     buscarPorProtocolo,
     listarTodas,
-    atualizar
+    atualizar,
+    excluir
 };

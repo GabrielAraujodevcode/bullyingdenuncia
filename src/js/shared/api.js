@@ -105,6 +105,42 @@ window.Api = {
         return resultado.denuncia;
 
     },
+   async excluirDenuncia(id) {
+
+    const resposta = await fetch(
+        `${API_URL}/denuncias/${id}`,
+        {
+            method: "DELETE",
+            headers: obterHeaders()
+        }
+    );
+
+    const conteudo = await resposta.text();
+
+    let resultado;
+
+    try {
+        resultado = JSON.parse(conteudo);
+    } catch {
+        console.error(
+            "A API retornou conteúdo que não é JSON:",
+            conteudo
+        );
+
+        throw new Error(
+            `A rota de exclusão não retornou JSON. Status: ${resposta.status}`
+        );
+    }
+
+    if (!resposta.ok) {
+        throw new Error(
+            resultado.erro ||
+            "Não foi possível excluir a denúncia."
+        );
+    }
+
+    return resultado.denuncia;
+},
 
 
     /* ==========================

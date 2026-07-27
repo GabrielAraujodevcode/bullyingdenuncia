@@ -83,11 +83,38 @@ async function atualizarDenuncia(req, res) {
         });
     }
 }
+async function excluirDenuncia(req, res) {
+    try {
+        const { id } = req.params;
+
+        const denuncia =
+            await denunciaService.excluir(id);
+
+        return res.status(200).json({
+            mensagem: "Denúncia excluída com sucesso.",
+            denuncia
+        });
+
+    } catch (erro) {
+        console.error(
+            "Erro ao excluir denúncia:",
+            erro
+        );
+
+        return res
+            .status(erro.statusCode || 500)
+            .json({
+                erro:
+                    erro.message ||
+                    "Erro interno ao excluir a denúncia."
+            });
+    }
+}
 module.exports = {
     criarDenuncia,
     buscarDenunciaPorProtocolo,
     listarDenuncias,
-    atualizarDenuncia
+    atualizarDenuncia,
+    excluirDenuncia
 };
-
         

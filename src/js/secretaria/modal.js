@@ -5,6 +5,7 @@ MODAL DA DENÚNCIA
 window.DenunciaSecretariaModal = {
 
     protocoloSelecionado: null,
+    idSelecionado: null,
 
     async abrir(protocolo) {
 
@@ -39,6 +40,9 @@ window.DenunciaSecretariaModal = {
                 await window.Api.buscarDenuncia(
                     protocolo
                 );
+            
+                this.idSelecionado =
+                 denuncia.id;
 
             this.protocoloSelecionado =
                 denuncia.protocolo;
@@ -100,6 +104,7 @@ window.DenunciaSecretariaModal = {
         elementos.contador.textContent = "0";
 
         this.protocoloSelecionado = null;
+        this.idSelecionado = null;
     },
 
     iniciar() {

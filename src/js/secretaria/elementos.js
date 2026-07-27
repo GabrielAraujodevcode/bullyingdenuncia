@@ -37,6 +37,11 @@ window.DenunciaSecretariaElementos = {
         document.getElementById("mensagemSecretaria"),
 
     contador:
-        document.getElementById("contadorMensagem")
+        document.getElementById("contadorMensagem"),
+
+    botaoExcluir:
+    document.getElementById(
+        "botaoExcluirDenuncia"
+    )
 
 };

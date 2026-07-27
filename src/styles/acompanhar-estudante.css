@@ -1,276 +1,863 @@
-.title{
+/* Header */
+
+header {
+    position: relative;
+
+    min-height: 80vh;
+    padding: 7rem 1.5rem 5rem;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    text-align: center;
-}
-
-.title h1{
-    color: white;
-
-    font-size: clamp(2.2rem, 6vw, 4rem);
-}
-
-/* ==========================
-PÁGINA DO ESTUDANTE
-========================== */
-
-.areaAcompanhamento{
-    display: flex;
     justify-content: center;
 
-    padding: 3rem 1rem;
+    background:
+        radial-gradient(
+            circle at 15% 18%,
+            rgba(255, 255, 255, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 78%,
+            rgba(93, 169, 255, 0.22),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #043b89 0%,
+            #0866ff 48%,
+            #003f9e 100%
+        );
+
+    box-shadow:
+        0 18px 45px rgba(8, 102, 255, 0.2);
+
+    overflow: hidden;
 }
 
-.containerAcompanhamento{
-    width: 100%;
-    max-width: 800px;
+header::before,
+header::after {
+    content: "";
 
-    padding: 2rem;
+    position: absolute;
 
-    background-color: #E2E8F0E6;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 50%;
 
-    border-radius: 1.5625rem;
+    background: rgba(255, 255, 255, 0.05);
 
-    box-shadow: 0 16px 35px rgba(0, 0, 0, .22);
+    pointer-events: none;
 }
 
-.containerAcompanhamento h2{
-    margin-bottom: 2rem;
+header::before {
+    top: -11rem;
+    right: -8rem;
 
-    color: #0A194E;
-
-    font-size: 2rem;
-
-    text-align: center;
+    width: 32rem;
+    height: 32rem;
 }
 
-.grupoProtocolo,
-.grupoStatus{
-    margin-bottom: 2rem;
+header::after {
+    bottom: -14rem;
+    left: -9rem;
 
-    text-align: center;
+    width: 36rem;
+    height: 36rem;
 }
 
-.tituloInformacao{
-    display: block;
 
-    margin-bottom: .7rem;
+/* Botão voltar */
 
-    color: #0A194E;
+.voltarPagina {
+    position: absolute;
+    z-index: 5;
 
-    font-size: 1.2rem;
-    font-weight: bold;
+    top: 1.8rem;
+    left: 2rem;
+
+    padding: 0.75rem 1rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.8rem;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-#protocoloEstudante{
-    display: inline-block;
+.voltarPagina svg {
+    width: 1.2rem;
+    height: 1.2rem;
 
-    padding: 1rem 1.5rem;
-
-    background-color: #0A194E;
-
-    color: white;
-
-    border-radius: 1rem;
-
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-
-    letter-spacing: 2px;
-
-    user-select: all;
+    transition: transform 0.25s ease;
 }
 
-.statusDenuncia{
-    display: inline-block;
+.voltarPagina:hover {
+    transform: translateY(-2px);
 
-    padding: .8rem 2rem;
+    background: rgba(255, 255, 255, 0.17);
 
-    color: white;
-
-    border-radius: 2rem;
-
-    font-size: 1.2rem;
-    font-weight: bold;
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.13);
 }
 
-.statusAnalise{
-    background-color: #d97706;
+.voltarPagina:hover svg {
+    transform: translateX(-3px);
 }
 
-.statusAndamento{
-    background-color: #0056c6;
-}
 
-.statusConcluida{
-    background-color: #15803d;
-}
+/* Header */
 
-/* LINHA DE PROGRESSO */
+.title {
+    position: relative;
+    z-index: 2;
 
-.etapasStatus{
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    margin: 2.5rem 0;
-}
-
-.etapa{
-    width: 7rem;
+    width: min(950px, 100%);
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    color: #64748b;
+    text-align: center;
+
+    animation: entradaTitulo 0.7s ease both;
+}
+
+.etiquetaHeader {
+    margin-bottom: 1.2rem;
+    padding: 0.6rem 1rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.iconeHeader {
+    width: 5.4rem;
+    height: 5.4rem;
+    margin-bottom: 1.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.5rem;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.12);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.iconeHeader svg {
+    width: 2.65rem;
+    height: 2.65rem;
+}
+
+.title h1 {
+    color: #ffffff;
+
+    font-size: clamp(3.2rem, 8vw, 6.1rem);
+    font-weight: 900;
+    letter-spacing: -0.065em;
+    line-height: 0.98;
+
+    text-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+.descricaoHeader {
+    max-width: 760px;
+    margin-top: 1.4rem;
+
+    color: rgba(255, 255, 255, 0.84);
+
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.75;
+}
+
+.recursosHeader {
+    margin-top: 2rem;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.recursosHeader span {
+    padding: 0.75rem 1rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.8rem;
+
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.recursosHeader span svg {
+    width: 1.15rem;
+    height: 1.15rem;
+
+    flex-shrink: 0;
+}
+
+
+/* Acompanhamento */
+
+.areaAcompanhamento {
+    width: 100%;
+    padding: 5rem 1rem 6rem;
+}
+
+
+/* Container */
+
+.containerAcompanhamento {
+    position: relative;
+
+    width: min(1000px, 100%);
+    margin: 0 auto;
+    padding: 2.8rem;
+
+    border: 1px solid rgba(24, 119, 242, 0.1);
+    border-radius: 1.7rem;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(24, 119, 242, 0.11),
+            transparent 28%
+        ),
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f8fbff 55%,
+            #edf5ff 100%
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 24px 60px rgba(15, 23, 42, 0.12),
+        0 7px 20px rgba(24, 119, 242, 0.06);
+
+    overflow: hidden;
+
+    animation: entradaContainer 0.65s ease both;
+}
+
+.containerAcompanhamento::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 0.38rem;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0866ff,
+            #65a9ff,
+            #0866ff
+        );
+}
+
+.containerAcompanhamento > h2 {
+    margin-bottom: 2rem;
+    padding-bottom: 1.4rem;
+
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+
+    color: #172033;
+
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 850;
+    letter-spacing: -0.045em;
+    text-align: center;
+}
+
+
+/* Cards */
+
+.cardInformacao {
+    position: relative;
+
+    padding: 1.5rem;
+
+    border: 1px solid rgba(24, 119, 242, 0.1);
+    border-radius: 1.15rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.96),
+            rgba(241, 247, 255, 0.94)
+        );
+
+    box-shadow:
+        0 8px 22px rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.cardInformacao:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(24, 119, 242, 0.18);
+
+    box-shadow:
+        0 12px 28px rgba(24, 119, 242, 0.09);
+}
+
+
+/* Protocolo e status */
+
+.grupoProtocolo,
+.grupoStatus {
+    margin-bottom: 1.25rem;
+}
+
+.tituloInformacao {
+    margin-bottom: 0.8rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    color: #475569;
+
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.tituloInformacao svg {
+    width: 1.15rem;
+    height: 1.15rem;
+
+    flex-shrink: 0;
+
+    color: #0866ff;
+}
+
+#protocoloEstudante {
+    width: 100%;
+    padding: 1.1rem 1.3rem;
+
+    display: block;
+
+    border: 1px solid rgba(8, 102, 255, 0.13);
+    border-radius: 0.9rem;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071338,
+            #0a194e,
+            #102761
+        );
+
+    box-shadow:
+        0 10px 24px rgba(10, 25, 78, 0.2);
+
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-align: center;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Status */
+
+.statusDenuncia {
+    width: fit-content;
+    min-width: 9rem;
+    padding: 0.65rem 1rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.statusAnalise {
+    color: #8a5800;
+    background: #fff4cc;
+}
+
+.statusAndamento {
+    color: #0756a5;
+    background: #dcebff;
+}
+
+.statusConcluida {
+    color: #167044;
+    background: #dcf8e9;
+}
+
+
+/* Etapas */
+
+.etapasStatus {
+    width: 100%;
+    margin: 2.5rem 0;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.etapa {
+    position: relative;
+
+    width: 8rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-align: center;
 }
 
-.etapa span{
-    width: 3rem;
-    height: 3rem;
+.etapa span {
+    position: relative;
+    z-index: 2;
+
+    width: 3.3rem;
+    height: 3.3rem;
 
     display: flex;
+    align-items: center;
     justify-content: center;
+
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+
+    color: #64748b;
+    background: #ffffff;
+
+    box-shadow:
+        0 6px 16px rgba(15, 23, 42, 0.08);
+
+    font-size: 1rem;
+    font-weight: 850;
+
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.etapa p {
+    margin-top: 0.75rem;
+
+    color: #64748b;
+
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.etapa.ativa span {
+    border-color: #0866ff;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0866ff,
+            #1877f2
+        );
+
+    box-shadow:
+        0 9px 22px rgba(8, 102, 255, 0.25);
+
+    transform: scale(1.06);
+}
+
+.etapa.ativa p {
+    color: #0866ff;
+}
+
+.etapa.concluida span {
+    border-color: #20a465;
+
+    color: #ffffff;
+    background: #20a465;
+
+    box-shadow:
+        0 8px 20px rgba(32, 164, 101, 0.22);
+}
+
+.etapa.concluida p {
+    color: #167044;
+}
+
+.linhaEtapa {
+    width: min(16%, 8rem);
+    height: 0.3rem;
+    margin-top: 1.5rem;
+
+    border-radius: 999px;
+
+    background: #dbe3ed;
+
+    transition: background-color 0.35s ease;
+}
+
+.linhaEtapa.ativa,
+.linhaEtapa.concluida {
+    background:
+        linear-gradient(
+            90deg,
+            #0866ff,
+            #65a9ff
+        );
+}
+
+
+/* Mensagem */
+
+.grupoMensagem {
+    margin-top: 2rem;
+}
+
+.grupoMensagem h3 {
+    margin-bottom: 1rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    color: #172033;
+
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.grupoMensagem h3 svg {
+    width: 1.4rem;
+    height: 1.4rem;
+
+    flex-shrink: 0;
+
+    color: #0866ff;
+}
+
+.mensagemSecretaria {
+    position: relative;
+
+    min-height: 9rem;
+    padding: 1.6rem 1.6rem 1.6rem 1.9rem;
+
+    display: flex;
     align-items: center;
 
-    background-color: #cbd5e1;
+    border: 1px solid rgba(8, 102, 255, 0.14);
+    border-radius: 1.1rem;
 
-    color: white;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(8, 102, 255, 0.12),
+            transparent 34%
+        ),
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f3f8ff 55%,
+            #e8f2ff 100%
+        );
+
+    box-shadow:
+        0 10px 26px rgba(15, 23, 42, 0.07);
+
+    overflow: hidden;
+}
+
+.mensagemSecretaria::before {
+    content: "";
+
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    left: 0;
+
+    width: 0.32rem;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0866ff,
+            #65a9ff
+        );
+}
+
+.mensagemSecretaria::after {
+    content: "";
+
+    position: absolute;
+    top: -4rem;
+    right: -4rem;
+
+    width: 10rem;
+    height: 10rem;
 
     border-radius: 50%;
 
-    font-size: 1.1rem;
-    font-weight: bold;
+    background:
+        radial-gradient(
+            circle,
+            rgba(8, 102, 255, 0.13),
+            transparent 70%
+        );
+
+    pointer-events: none;
 }
 
-.etapa p{
-    margin-top: .6rem;
+.mensagemSecretaria p {
+    position: relative;
+    z-index: 2;
 
-    font-size: .95rem;
-    font-weight: bold;
+    margin: 0;
+
+    color: #3f4d62;
+
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.75;
+
+    overflow-wrap: anywhere;
 }
 
-.etapa.ativa{
-    color: #0A194E;
-}
+/* Responsividade */
 
-.etapa.ativa span{
-    background-color: #0056c6;
-}
+@media (max-width: 768px) {
 
-.linhaEtapa{
-    width: 22%;
-    height: .4rem;
-
-    margin-top: 1.3rem;
-
-    background-color: #cbd5e1;
-
-    border-radius: 1rem;
-}
-
-.linhaEtapa.ativa{
-    background-color: #0056c6;
-}
-
-/* MENSAGEM */
-
-.grupoMensagem h3{
-    margin-bottom: 1rem;
-
-    color: #0A194E;
-
-    font-size: 1.3rem;
-}
-
-.mensagemSecretaria{
-    min-height: 8rem;
-
-    padding: 1.5rem;
-
-    display: flex;
-    align-items: center;
-
-    background-color: white;
-
-    border-left: .4rem solid #0056c6;
-    border-radius: 1rem;
-
-    box-shadow: 0 7px 18px rgba(10, 25, 78, .10);
-}
-
-.mensagemSecretaria p{
-    color: #334155;
-
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-/* ==========================
-RESPONSIVIDADE
-========================== */
-
-@media(max-width: 700px){
-
-    .containerAcompanhamento,
-    .containerTabela,
-    .janelaDenuncia{
-        padding: 1.3rem;
+    header {
+        min-height: 92vh;
+        padding: 6.5rem 1.2rem 4rem;
     }
 
-    .etapasStatus{
+    .voltarPagina {
+        top: 1.2rem;
+        left: 1.2rem;
+    }
+
+    .title h1 {
+        font-size: clamp(3rem, 16vw, 5rem);
+    }
+
+    .recursosHeader {
+        width: 100%;
+    }
+
+    .recursosHeader span {
+        width: 100%;
+        max-width: 22rem;
+
+        justify-content: center;
+    }
+
+    .areaAcompanhamento {
+        padding: 3rem 0.75rem 4rem;
+    }
+
+    .containerAcompanhamento {
+        padding: 1.7rem;
+    }
+
+    .etapasStatus {
         align-items: flex-start;
     }
 
-    .etapa{
-        width: 5.5rem;
+    .etapa {
+        width: 6rem;
     }
 
-    .etapa p{
-        font-size: .75rem;
-    }
-
-    .linhaEtapa{
+    .linhaEtapa {
         width: 12%;
     }
-
-    .dadosDenuncia{
-        grid-template-columns: 1fr;
-    }
-
-    .campoCompleto{
-        grid-column: auto;
-    }
-
-    th,
-    td{
-        padding: .9rem;
-    }
-
 }
 
-@media(max-width: 480px){
 
-    .title h1{
-        font-size: 2.2rem;
+/* Responsividade */
+
+@media (max-width: 540px) {
+
+    header {
+        min-height: 100svh;
+        padding: 6rem 1rem 3rem;
     }
 
-    #protocoloEstudante{
-        letter-spacing: 1px;
+    .voltarPagina {
+        padding: 0.7rem;
     }
 
-    .etapa span{
-        width: 2.5rem;
-        height: 2.5rem;
+    .voltarPagina span {
+        display: none;
     }
 
-    .linhaEtapa{
-        margin-top: 1.1rem;
+    .voltarPagina svg {
+        width: 1.35rem;
+        height: 1.35rem;
     }
 
+    .iconeHeader {
+        width: 4.6rem;
+        height: 4.6rem;
+
+        border-radius: 1.2rem;
+    }
+
+    .iconeHeader svg {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .containerAcompanhamento {
+        padding: 1.25rem;
+
+        border-radius: 1.25rem;
+    }
+
+    .containerAcompanhamento > h2 {
+        font-size: 1.75rem;
+    }
+
+    .cardInformacao {
+        padding: 1.15rem;
+    }
+
+    #protocoloEstudante {
+        padding: 1rem;
+
+        font-size: 0.92rem;
+        letter-spacing: 0.06em;
+    }
+
+    .etapasStatus {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .etapa {
+        width: 4.8rem;
+    }
+
+    .etapa span {
+        width: 2.7rem;
+        height: 2.7rem;
+
+        font-size: 0.88rem;
+    }
+
+    .etapa p {
+        font-size: 0.72rem;
+    }
+
+    .linhaEtapa {
+        width: 8%;
+        height: 0.22rem;
+        margin-top: 1.25rem;
+    }
+
+    .mensagemSecretaria {
+        min-height: 7rem;
+        padding: 1.2rem 1.1rem 1.2rem 1.4rem;
+    }
+
+    .mensagemSecretaria p {
+        font-size: 0.92rem;
+        line-height: 1.65;
+    }
+}
+
+
+/* Responsividade */
+
+@media (max-width: 390px) {
+
+    .containerAcompanhamento {
+        padding: 1rem;
+    }
+
+    .cardInformacao {
+        padding: 1rem;
+    }
+
+    .etapa {
+        width: 4.2rem;
+    }
+
+    .linhaEtapa {
+        width: 6%;
+    }
+
+    .tituloInformacao {
+        font-size: 0.72rem;
+    }
 }

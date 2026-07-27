@@ -1,161 +1,761 @@
+/* Header */
 
-.title{
+.title {
+    position: relative;
+    z-index: 2;
+    width: min(900px, 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    animation: entradaTitulo 0.8s ease both;
 }
+
+.etiquetaHeader {
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
 #titulo1 {
-    color: white;
-    font-size: clamp(2rem,5vw, 3.125rem);
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-size: clamp(3.5rem, 10vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.07em;
+    line-height: 0.95;
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
 }
-#titulo2{
-    color: white;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+
+#titulo2 {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
 }
-.containners{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 6rem;
-   margin-top: 5rem;
-   padding: 0 1rem;
-   flex-wrap: wrap;
+
+.descricaoHeader {
+    max-width: 720px;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    line-height: 1.75;
 }
+
+.segurancaHeader {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.segurancaHeader span {
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.75rem;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.25s ease,
+        background-color 0.25s ease;
+}
+
+.segurancaHeader span:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.botaoExplorar {
+    margin-top: 2.5rem;
+    padding: 0.95rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0.8rem;
+    color: #0866ff;
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+    font-size: 1rem;
+    font-weight: 800;
+    transition: transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.botaoExplorar:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.2);
+}
+
+.botaoExplorar span {
+    font-size: 1.2rem;
+    animation: moverSeta 1.5s ease-in-out infinite;
+}
+
+@keyframes moverSeta {
+    0%,
+    100% {
+        transform: translateY(-2px);
+    }
+
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+/* Área dos cards */
+
+.containners {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 4.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* Cards */
+
 .contanner1,
 .contanner2,
-.contanner3{
-    background-color: #E2E8F0E6;
+.contanner3 {
+    position: relative;
+    min-height: 30rem;
+    padding: 2.8rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1.5625rem;
-    gap: 0.625rem;
-    border-radius: 1.5625rem;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    align-items: flex-start;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.25rem;
+    background: linear-gradient(
+       145deg,
+       #ffffff 0%,
+       #f8fbff 45%,
+       #eef6ff 100%
+);
+    box-shadow: 0 1px 0 rgba(255,255,255,.9) inset,
+0 20px 45px rgba(0,0,0,.08),
+0 5px 15px rgba(24,119,242,.06);
+    overflow: hidden;
+    transition: transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
-.contanner1,
-.contanner2,
-.contanner3 p{
-    color: #0A194E;
+
+.contanner1::before,
+.contanner2::before,
+.contanner3::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 0.3rem;
+    background: linear-gradient(
+            90deg,
+            #0866ff,
+            #5b9dff
+        );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
+
+.contanner1::after,
+.contanner2::after,
+.contanner3::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(
+
+circle,
+
+rgba(24,119,242,.18),
+
+transparent 70%
+
+);
+    filter: blur(15px);
+    opacity: .8;
+}
+
 .contanner1:hover,
 .contanner2:hover,
-.contanner3:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(151, 166, 207, 0.342);
+.contanner3:hover {
+    transform: translateY(-8px);
+    border-color: rgba(24, 119, 242, 0.18);
+    box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06),
+        0 24px 48px rgba(15, 23, 42, 0.14);
 }
+
+.contanner1:hover::before,
+.contanner2:hover::before,
+.contanner3:hover::before {
+    transform: scaleX(1);
+}
+
+.contanner1:hover::after,
+.contanner2:hover::after,
+.contanner3:hover::after {
+    transform: scale(1.18);
+    opacity: 0.8;
+}
+
+/* Cabeçalho dos cards */
+
 #servicos,
 #estudante,
-#secretaria{
+#secretaria {
+    position: relative;
+    z-index: 2;
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+}
+
+#servicos svg,
+#estudante svg,
+#secretaria svg {
+    width: 3.7rem;
+    height: 3.7rem;
+    padding: 0.95rem;
+    border-radius: 1rem;
+    background: linear-gradient(
+            135deg,
+            rgba(24, 119, 242, 0.12),
+            rgba(24, 119, 242, 0.05)
+        );
+    box-shadow: inset 0 0 0 1px rgba(24, 119, 242, 0.08);
+    transition: transform 0.35s ease,
+        background-color 0.35s ease;
+}
+
+.contanner1:hover svg,
+.contanner2:hover svg,
+.contanner3:hover svg {
+    transform: translateY(-4px) rotate(-1deg) scale(1.04);
 }
 
 #servicos h2,
 #estudante h2,
-#secretaria h2{
-    color: #0A194E;
-    font-size: clamp(1.5rem, 3vw, 2.1875rem);
+#secretaria h2 {
+    color: #172033;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
 }
 
-.botao{
+/* Texto dos cards */
+
+.contanner1 p,
+.contanner2 p,
+.contanner3 p {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 1.8rem;
+    color: #5f6673;
+    font-size: 1rem;
+    line-height: 1.7;
+    flex: 1;
+}
+
+/* Botões dos cards */
+
+.contanner1 a,
+.contanner2 a,
+.contanner3 a {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0;
+    display: block;
+    border-radius: 0.75rem;
+    background: transparent;
+    transition: transform 0.25s ease;
+}
+
+.contanner1 a:hover,
+.contanner2 a:hover,
+.contanner3 a:hover {
+    transform: none;
+}
+
+.contanner1 a button,
+.contanner2 a button,
+.contanner3 a button {
+    width: 100%;
+    padding: 0.85rem 1.2rem;
+    border: 1px solid rgba(24, 119, 242, 0.13);
+    border-radius: 0.75rem;
+    color: #0866ff;
+    background: #eef5ff;
+    box-shadow: none;
+    font-size: 0.95rem;
+    font-weight: 800;
+    transition: transform 0.25s ease,
+        color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.contanner1 a button:hover,
+.contanner2 a button:hover,
+.contanner3 a button:hover {
+    color: #ffffff;
+    background: #0866ff;
+    box-shadow: 0 10px 20px rgba(8, 102, 255, 0.22);
+    transform: translateY(-2px);
+}
+
+/* Card de denúncia */
+
+.ctaDenuncia {
+    width: min(1400px, calc(100% - 3rem));
+    margin: 90px auto;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 24px;
+    background: linear-gradient(
+145deg,
+#ffffff,
+#f8fbff
+);
+    border: 1px solid rgba(24,119,242,.08);
+    box-shadow: 0 20px 45px rgba(0,0,0,.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaDenuncia::before {
+    content: "";
+    position: absolute;
+    right: -120px;
+    top: -120px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(
+
+circle,
+
+rgba(24,119,242,.12),
+
+transparent 70%
+
+);
+    filter: blur(10px);
+}
+
+.ctaIcone {
+    width: 90px;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
+    border-radius: 22px;
+    background: linear-gradient(
+145deg,
+#edf5ff,
+#dcecff
+);
+    box-shadow: 0 10px 30px rgba(24,119,242,.18);
+    margin-bottom: 25px;
+}
+
+.ctaIcone svg {
+    width: 45px;
+    height: 45px;
+    color: #1877f2;
+}
+
+.ctaBadge {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #e8f1ff;
+    color: #1877f2;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.ctaDenuncia h2 {
+    font-size: 2.2rem;
+    color: #172033;
+    margin-bottom: 18px;
+}
+
+.ctaDenuncia p {
+    max-width: 650px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #5b6474;
+    margin-bottom: 35px;
+}
+
+.ctaDenuncia button {
+    padding: 18px 45px;
+    font-size: 18px;
+    border-radius: 14px;
+}
+
+/* Animação dos cards */
+
+.contanner1,
+.contanner2,
+.contanner3 {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.contanner1.cardVisivel,
+.contanner2.cardVisivel,
+.contanner3.cardVisivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contanner1 {
+    transition-delay: 0.05s;
+}
+
+.contanner2 {
+    transition-delay: 0.18s;
+}
+
+.contanner3 {
+    transition-delay: 0.31s;
+}
+
+/* Ícones */
+
+#servicos svg,
+#estudante svg,
+#secretaria svg {
+    animation: respirarIcone 4s ease-in-out infinite;
+}
+
+#estudante svg {
+    animation-delay: 0.7s;
+}
+
+#secretaria svg {
+    animation-delay: 1.4s;
+}
+
+@keyframes respirarIcone {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Atalho para denúncia */
+
+.atalhoDenuncia {
+    width: 100%;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
     padding: 0 1rem;
 }
 
-.botao button{
-    background-color: #0056c6;
-    padding: 1.25rem 5rem;
-    font-size: clamp(1rem, 2vw, 1.5625rem);
-    color: white;
-    font-weight: bold;
-    animation: brilho 1.5s infinite ease-in-out;
-}
-a{
-    padding: 0.3125rem 2.5rem;
-    border-radius: 1.5625rem;
-    background-color: #0A194E;
-    color: white;
-    cursor: pointer;
-    transition: .3s;
-    text-decoration: none;
-}
-a:hover{
-    transform:translateY(-3px);
+.atalhoDenuncia a {
+    padding: 0.9rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    border: 1px solid rgba(24, 119, 242, 0.18);
+    border-radius: 0.8rem;
+    color: #0866ff;
+    background-color: #ffffff;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-@keyframes brilho{
-    0%{
-        text-shadow: 0 0 5px #fff;
+.atalhoDenuncia a:hover {
+    transform: translateY(-3px);
+    background-color: #eef5ff;
+    box-shadow: 0 10px 24px rgba(24, 119, 242, 0.14);
+}
+
+.atalhoDenuncia svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    transition: transform 0.25s ease;
+}
+
+.atalhoDenuncia a:hover svg {
+    transform: translateY(3px);
+}
+
+/* Copyright */
+
+.copyright {
+    width: 100%;
+    margin-top: 60px;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(148,163,184,.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copyright p {
+    color: #94a3b8;
+    font-size: .95rem;
+    text-align: center;
+    letter-spacing: .3px;
+}
+
+.copyright strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Animações */
+
+@keyframes entradaTitulo {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
     }
-    50%{
-        text-shadow:
-        0 0 10px #fff,
-        0 0 20px #3b82f6,
-        0 0 20px #3b82f6;
-    }
-    100%{
-        text-shadow: 0 0 5px #fff;
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+@keyframes entradaCard {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
 
-/* ==========================
-   TABLETS
-========================== */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-@media (max-width: 992px){
+@keyframes moverGradiente {
+    0% {
+        background-position: 0% 50%;
+    }
 
-    .containners{
-        gap: 2rem;
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulsoBotao {
+    0%,
+    100% {
+        box-shadow: 0 10px 25px rgba(24, 119, 242, 0.26),
+            0 2px 5px rgba(15, 23, 42, 0.12);
+    }
+
+    50% {
+        box-shadow: 0 14px 32px rgba(24, 119, 242, 0.38),
+            0 3px 8px rgba(15, 23, 42, 0.14);
+    }
+}
+
+/* Tablets */
+
+@media (max-width: 992px) {
+    .containners {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 3rem;
+    }
+
+    .contanner3 {
+        grid-column: 1 / -1;
+        width: min(100%, 35rem);
+        justify-self: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        min-height: 88vh;
+        padding: 3rem 1.2rem;
+    }
+
+    #titulo1 {
+        font-size: clamp(3.4rem, 18vw, 5.5rem);
+    }
+
+    #titulo2 {
+        max-width: 24rem;
+        font-size: clamp(1.5rem, 8vw, 2.2rem);
+    }
+
+    .descricaoHeader {
+        max-width: 31rem;
+        margin-top: 1.25rem;
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    .segurancaHeader {
+        margin-top: 1.5rem;
+    }
+
+    .segurancaHeader span {
+        width: 100%;
+        max-width: 21rem;
+    }
+
+    .botaoExplorar {
+        width: 100%;
+        max-width: 21rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        min-height: 100svh;
+        padding: 2.5rem 1rem;
+    }
+
+    .etiquetaHeader {
+        margin-bottom: 1.2rem;
+        font-size: 0.8rem;
+    }
+
+    #titulo1 {
+        font-size: clamp(3rem, 19vw, 4.5rem);
+    }
+
+    #titulo2 {
+        font-size: clamp(1.35rem, 8vw, 1.85rem);
+    }
+
+    .descricaoHeader {
+        font-size: 0.92rem;
+    }
+}
+
+/* Celulares */
+
+@media (max-width: 768px) {
+    #titulo1 {
+        font-size: clamp(2rem, 11vw, 3rem);
+    }
+
+    #titulo2 {
+        max-width: 22rem;
+        font-size: clamp(1rem, 5vw, 1.3rem);
+    }
+
+    .containners {
+        width: min(100% - 1.5rem, 32rem);
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 2rem;
     }
 
     .contanner1,
     .contanner2,
-    .contanner3{
-        width: 45%;
+    .contanner3 {
+        width: 100%;
+        min-height: auto;
+        padding: 1.5rem;
     }
 
-    .botao button{
-        padding: 1rem 3.5rem;
+    .contanner3 {
+        grid-column: auto;
+    }
+
+    .contanner1:hover,
+    .contanner2:hover,
+    .contanner3:hover {
+        transform: translateY(-4px);
+    }
+
+    .botao {
+        width: min(100% - 1.5rem, 32rem);
+        margin-top: 1.5rem;
+    }
+
+    .botao button {
+        width: 100%;
+        min-width: 0;
     }
 }
 
-/* ==========================
-   CELULARES
-========================== */
+/* Telas pequenas */
 
-@media (max-width: 768px){
-
-    header{
+@media (max-width: 480px) {
+    .contanner1,
+    .contanner2,
+    .contanner3 {
         padding: 1.25rem;
+        border-radius: 1rem;
     }
 
-    .containners{
-        flex-direction: column;
-        gap: 1.5rem;
-        margin-top: 3rem;
+    #servicos,
+    #estudante,
+    #secretaria {
+        gap: 0.8rem;
     }
 
-    .contanner1,
-    .contanner2,
-    .contanner3{
-        width: 100%;
-        max-width: 22rem;
+    #servicos svg,
+    #estudante svg,
+    #secretaria svg {
+        width: 3.2rem;
+        height: 3.2rem;
+        padding: 0.8rem;
     }
 
-    .botao{
-        margin-top: 3rem;
-    }
-
-    .botao button{
-        width: 100%;
-        max-width: 22rem;
-        padding: 1rem;
+    .contanner1 p,
+    .contanner2 p,
+    .contanner3 p {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
 }

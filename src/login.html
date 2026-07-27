@@ -21,7 +21,29 @@
 
 <body>
 
+    <!-- Header -->
+
     <header>
+
+        <a
+            href="index.html"
+            class="voltarInicio"
+            aria-label="Voltar para a página inicial"
+        >
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+            >
+                <path
+                    fill="currentColor"
+                    d="M73.4 297.4C60.9 309.9 60.9 330.2 73.4 342.7L233.4 502.7C245.9 515.2 266.2 515.2 278.7 502.7C291.2 490.2 291.2 469.9 278.7 457.4L173.3 352H544C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288H173.3L278.7 182.6C291.2 170.1 291.2 149.8 278.7 137.3C266.2 124.8 245.9 124.8 233.4 137.3L73.4 297.4Z"
+                />
+            </svg>
+
+            <span>Voltar ao início</span>
+
+        </a>
 
         <div class="title">
 
@@ -31,6 +53,8 @@
 
     </header>
 
+    <!-- Main -->
+
     <main>
 
         <section class="areaLogin">
@@ -39,7 +63,15 @@
 
                 <div class="iconeLogin">
 
-                    <span>🔒</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M192 272L192 208C192 137.3 249.3 80 320 80C390.7 80 448 137.3 448 208L448 272L480 272C497.7 272 512 286.3 512 304L512 528C512 545.7 497.7 560 480 560L160 560C142.3 560 128 545.7 128 528L128 304C128 286.3 142.3 272 160 272L192 272ZM256 272L384 272L384 208C384 172.7 355.3 144 320 144C284.7 144 256 172.7 256 208L256 272Z"
+                        />
+                    </svg>
 
                 </div>
 
@@ -53,18 +85,18 @@
 
                     <div class="campoLogin">
 
-                      <label for="email">
-    E-mail
-</label>
+                        <label for="email">
+                            E-mail
+                        </label>
 
-<input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="Digite seu e-mail"
-    autocomplete="email"
-    required
->
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                            required
+                        >
 
                     </div>
 
@@ -91,7 +123,17 @@
                                 class="mostrarSenha"
                                 aria-label="Mostrar senha"
                             >
-                                👁
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 640 640"
+                                >
+                                    <path
+                                        fill="currentColor"
+                                        d="M320 160C441.8 160 542.1 240.3 576 352C542.1 463.7 441.8 544 320 544C198.2 544 97.9 463.7 64 352C97.9 240.3 198.2 160 320 160ZM320 448C373 448 416 405 416 352C416 299 373 256 320 256C267 256 224 299 224 352C224 405 267 448 320 448Z"
+                                    />
+                                </svg>
+
                             </button>
 
                         </div>
@@ -117,6 +159,33 @@
         </section>
 
     </main>
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="copyright">
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+            >
+                <path
+                    fill="currentColor"
+                    d="M320 64L96 176V320C96 459.5 191.5 532.7 320 576C448.5 532.7 544 459.5 544 320V176L320 64Z"
+                />
+            </svg>
+
+            <p>
+                © 2026 Portal de Denúncias • Desenvolvido por
+                <strong>Gabriel Araújo</strong>
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- Scripts -->
 
     <script src="js/login.js"></script>
 

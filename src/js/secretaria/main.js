@@ -9,6 +9,8 @@ function iniciarPaginaSecretaria(){
     window.DenunciaSecretariaAtualizar.iniciar();
 
     window.DenunciaSecretariaTabela.montar();
+    
+    window.DenunciaSecretariaExcluir.iniciar();
 
 }
 
