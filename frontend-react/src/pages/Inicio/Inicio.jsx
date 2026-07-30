@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import "./inicio.css";
+import "./Inicio.css";
 import "../../styles/denuncias.css";
 import { api } from "../../services/api";
 
