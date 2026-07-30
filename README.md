@@ -1,23 +1,22 @@
-# 🛡️ Sistema de Denúncias Anônimas contra Bullying
+# 🛡️ Bullying Denúncia
 
-![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?logo=jsonwebtokens&logoColor=white)
+Sistema Full Stack desenvolvido para oferecer um canal seguro e anônimo de denúncias de bullying em instituições de ensino.
+
+O projeto permite que estudantes realizem denúncias sem revelar sua identidade e acompanhem o andamento do caso através de um protocolo único. A equipe responsável possui um painel administrativo para analisar, atualizar e gerenciar todas as denúncias.
+
+> Projeto desenvolvido como parte da minha evolução como Desenvolvedor Full Stack.
 
 ---
 
-## 📖 Sobre o projeto
+# 📷 Demonstração
 
-O **Sistema de Denúncias Anônimas contra Bullying** foi desenvolvido com o objetivo de oferecer um ambiente seguro para que estudantes possam registrar denúncias de bullying de forma totalmente anônima.
+> Em breve
 
-Além do registro das denúncias, o sistema permite que a secretaria acompanhe, analise e atualize cada caso, mantendo a comunicação com o estudante através de mensagens e do acompanhamento por protocolo.
+Frontend:
+(Adicionar URL da Render)
 
-Todo o projeto foi desenvolvido utilizando tecnologias modernas de desenvolvimento web, arquitetura em camadas e banco de dados PostgreSQL.
+Backend API:
+https://bullyingdenuncia-api.onrender.com/api
 
 ---
 
@@ -25,63 +24,50 @@ Todo o projeto foi desenvolvido utilizando tecnologias modernas de desenvolvimen
 
 ## 👨‍🎓 Área do Estudante
 
-- Cadastro de denúncia anônima
+- Cadastro de denúncias anônimas
 - Geração automática de protocolo
-- Consulta da denúncia pelo protocolo
-- Acompanhamento do status
-- Visualização da mensagem enviada pela secretaria
-- Comentários públicos
-- Visualização das notícias da secretaria
+- Acompanhamento da denúncia
+- Visualização do status
+- Mensagens enviadas pela secretaria
+- Sistema de comentários
+- Visualização de notícias
 
 ---
 
-## 🏫 Área da Secretaria
+## 🏫 Área Administrativa
 
-- Login protegido por autenticação
+- Login com autenticação JWT
 - Listagem de denúncias
 - Atualização do status
 - Envio de mensagens ao estudante
-- Publicação de notícias
-- Exclusão de notícias
-- Gerenciamento dos comentários
-- Exclusão de comentários
+- Exclusão de denúncias
+- Gerenciamento de comentários
+- Gerenciamento de notícias
 
 ---
 
-# 🔒 Segurança
-
-O sistema utiliza diversas práticas de segurança:
-
-- Senhas criptografadas com bcrypt
-- Autenticação utilizando JWT
-- Rotas protegidas por middleware
-- Consultas SQL parametrizadas
-- Variáveis sensíveis armazenadas em arquivo .env
-- Proteção contra SQL Injection
-
----
-
-# 🛠️ Tecnologias Utilizadas
+# 🖥️ Tecnologias
 
 ## Front-end
 
+- React
+- React Router
+- JavaScript
 - HTML5
 - CSS3
-- JavaScript
+- Vite
 
 ## Back-end
 
 - Node.js
-- Express.js
+- Express
+- JWT
+- Bcrypt
+- PostgreSQL
 
 ## Banco de Dados
 
 - PostgreSQL
-
-## Segurança
-
-- JWT
-- bcrypt
 
 ## Versionamento
 
@@ -90,6 +76,119 @@ O sistema utiliza diversas práticas de segurança:
 
 ---
 
-# 🏗️ Arquitetura
+# 📂 Estrutura do Projeto
 
-O projeto segue o padrão de arquitetura em camadas.
+```
+bullying/
+│
+├── backend/
+│
+└── frontend-react/
+```
+
+---
+
+# 🔒 Segurança
+
+O sistema possui:
+
+- Autenticação JWT
+- Hash de senhas
+- Rotas protegidas
+- Validação de dados
+- Comunicação via API REST
+- Separação entre área pública e administrativa
+
+---
+
+# 🚀 Como executar
+
+## Clonar
+
+```bash
+git clone https://github.com/GabrielAraujodevcode/bullyingdenuncia.git
+```
+
+---
+
+## Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend-react
+npm install
+npm run dev
+```
+
+---
+
+# 🌐 API
+
+```
+https://bullyingdenuncia-api.onrender.com/api
+```
+
+Principais endpoints:
+
+```
+POST /auth/login
+
+POST /denuncias
+
+GET /denuncias
+
+GET /denuncias/protocolo/:protocolo
+
+PUT /denuncias/:id
+
+DELETE /denuncias/:id
+
+GET /comentarios
+
+POST /comentarios
+
+DELETE /comentarios/:id
+
+GET /noticias
+
+POST /noticias
+
+DELETE /noticias/:id
+```
+
+---
+
+# 💡 Objetivo
+
+Mais do que um projeto acadêmico, este sistema foi desenvolvido pensando em uma necessidade real das instituições de ensino: oferecer um ambiente mais seguro para que estudantes possam denunciar situações de bullying sem medo de exposição.
+
+O projeto representa minha evolução prática em desenvolvimento Full Stack, aplicando conceitos de arquitetura de software, APIs REST, autenticação, banco de dados, React e integração completa entre frontend e backend.
+
+---
+
+# 📬 Contato
+
+**Gabriel Henrique de Araújo Silva**
+
+📧 ghdas.gabriel@gmail.com
+
+💼 LinkedIn
+
+https://www.linkedin.com/in/gabriel-araujo
+
+🐙 GitHub
+
+https://github.com/GabrielAraujodevcode
+
+---
+
+## ⭐ Se este projeto foi útil, deixe uma estrela no repositório!
