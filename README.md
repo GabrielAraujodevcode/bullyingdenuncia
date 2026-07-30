@@ -183,7 +183,7 @@ O projeto representa minha evolução prática em desenvolvimento Full Stack, ap
 
 💼 LinkedIn
 
-https://www.linkedin.com/in/gabriel-araujo
+https://www.linkedin.com/in/gabriel-ara%C3%BAjo-1875a2291/
 
 🐙 GitHub
 
